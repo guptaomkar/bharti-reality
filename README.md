@@ -1,103 +1,100 @@
-# Real Estate - Real Estate Web App
+# HAVEN - Premium Real Estate Platform
 
+HAVEN is a modern, premium real estate web application built with the MERN stack (MongoDB, Express.js, React, Node.js) and Prisma. Designed with a cinematic "dark obsidian and gold" aesthetic, HAVEN provides an immersive platform for users to search, list, book, and explore exclusive properties. The application offers a sophisticated, glass-morphism interface, advanced search capabilities, and a seamless user experience.
 
-
-Homyz is a modern real estate web application built with the MERN (MongoDB, Express.js, React, Node.js) stack. It provides a platform for users to search, list, book,  and explore various properties, whether for sale or rent. The application offers a user-friendly interface, advanced search options, and a seamless user experience.
-
-![image](https://github.com/Ananya01Agrawal/Real-estate-Booking-Website/assets/99130567/9dce86bd-771c-493a-821f-bce92039c688)
-
+> **Note**: *Add your new HAVEN aesthetic screenshots here.*
+> 
+> *Placeholder for Hero Section Screenshot*
+> `![HAVEN Hero Section](./screenshots/hero-dark.png)`
 
 ## Features
 
-- *Property Listings*: View a wide range of property listings with detailed information, including descriptions, prices, addresses, and more.
+- **Premium Property Listings**: View an exclusive range of property listings with comprehensive details, including descriptions, prices, high-quality images, and unique selling points.
+- **Advanced Search**: Customize your property search by type (rent/sale), amenities, sorting options, and more, all navigated through a sleek, modern UI.
+- **User Profiles**: Registered users can securely create and manage their profiles, keeping track of their listings and preferences.
+- **Authentication**: Secure user registration and seamless login functionality (powered by Auth0).
+- **Schedule a Visit**: Select preferred dates to book exclusive on-site property visits.
+- **Interactive Maps & Location Information**: Integrated maps (Leaflet/Esri) provide crucial location data, showing properties, nearby amenities, and transportation options to help users make informed decisions.
+- **Favorites Collection**: Effortlessly curate and manage a collection of your favorite properties.
 
-- *Advanced Search*: Customize your property search by type (rent/sale), amenities, sorting options, and more.
-
-- *User Profiles*: Registered users can create and manage their profiles with profile pictures and listings also.
-
-- *Authentication*: Secure user registration and login functionality with Google OAuth.
-
-- *Book your Visit*: you can also select the date at which you want to visit the site.
-
-- *Maps and Location Information*: Integrating maps and providing location information is crucial for real estate and hospitality websites. Interactive maps can show the location of properties, nearby amenities (e.g., schools, restaurants, hospitals), transportation options, and other points of interest. This helps users understand the neighborhood and make informed decisions.
-
-- *Mark as Favourites*: you can also mark as favourite the property which you like.
-
-- *Property Details and Descriptions*: Each property listing should have comprehensive details and descriptions, including property features, room dimensions, amenities, nearby attractions, and any unique selling points. High-quality images and virtual tours can provide a more immersive experience for users.
-
-- ![image](https://github.com/Ananya01Agrawal/Real-estate-Booking-Website/assets/99130567/a49e7fd3-68cf-4e35-ab2a-d88d279fb5a1)
-
-![image](https://github.com/Ananya01Agrawal/Real-estate-Booking-Website/assets/99130567/a4f9bd34-9c94-40ea-ad42-8b2d66723028)
-
-![image](https://github.com/Ananya01Agrawal/Real-estate-Booking-Website/assets/99130567/43de1959-9201-4f0e-99e5-47faac7eb177)
-
-
+> *Placeholder for Map View Screenshot*
+> `![HAVEN Map View](./screenshots/map-dark.png)`
 
 ## Installation
 
 1. Clone the repository:
-
-   bash
+   ```bash
    git clone https://github.com/Ananya01Agrawal/Real-estate-Booking-Website.git
-   
+   ```
 
 2. Change into the project directory:
-   bash
+   ```bash
    cd Real-estate-Booking-Website
-   
-3. Install server dependencies:
+   ```
 
-   
+3. Install server dependencies and start the backend:
+   ```bash
+   cd server
    npm install
-   
+   ```
 
 4. Install client dependencies:
-
-   
-   cd client
+   ```bash
+   cd ../client
    npm install
+   ```
+
+5. Create `.env` files.
    
+   **In the `server` directory (e.g., `server/.env`):**
+   ```env
+   PORT=8000
+   DATABASE_URL="YOUR_MONGODB_URI"
+   # Add your Auth0 backend configuration if applicable
+   ```
 
-5. Create a .env file in the root directory with your configuration settings.
+   **In the `client` directory (e.g., `client/.env.local`):**
+   ```env
+   VITE_API_URL=http://localhost:8000
+   # VITE_AUTH0_DOMAIN="..."
+   # VITE_AUTH0_CLIENT_ID="..."
+   ```
 
+6. Start the development servers:
 
-   MONGO = "MONGODB URI"
-   JWT_SECRET = "JWTSECRET"
-   
+   **Backend (Haven Aesthetic Server):**
+   ```bash
+   cd server
+   npm run haven:dev
+   ```
 
-6. Start the development server:
-
-   
+   **Frontend:**
+   ```bash
+   cd client
    npm run dev
-   
+   ```
 
 ## Usage
 
-- Explore property listings, customize your search, and create a user profile to list properties or access additional features.
+- Explore curated property listings, use the advanced search functionality, and create a user profile to unlock booking features and property management.
 
 ## Contributing
 
-Contributions are welcome! Please follow these steps to contribute to the project:
+Contributions are welcome! Please follow these steps to contribute:
 
 1. Fork the repository.
 2. Create a new branch for your feature or bug fix:
-
-   bash
+   ```bash
    git checkout -b feature/your-feature-name
-   
-
+   ```
 3. Make your changes and commit them:
-
-   bash
+   ```bash
    git commit -m "Your commit message here"
-   
-
+   ```
 4. Push your changes to your fork:
-
-   bash
+   ```bash
    git push origin feature/your-feature-name
-   
-
+   ```
 5. Create a pull request to the main repository.
 
 ## License
@@ -106,5 +103,5 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 
 ## Contact
 
-1. [GITHUB](https://github.com/Ananya01Agrawal)
-2. [LINKEDIN](https://www.linkedin.com/in/ananya-agrawal-9727b2230/)
+- [GitHub](https://github.com/Ananya01Agrawal)
+- [LinkedIn](https://www.linkedin.com/in/ananya-agrawal-9727b2230/)
