@@ -103,5 +103,5 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 
 ## Contact
 
-- [GitHub](https://github.com/Ananya01Agrawal)
-- [LinkedIn](https://www.linkedin.com/in/ananya-agrawal-9727b2230/)
+- [GitHub](https://github.com/guptaomkar)
+- [LinkedIn](https://www.linkedin.com/in/omkargupta0/)
