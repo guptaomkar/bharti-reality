@@ -1,0 +1,27 @@
+/* ─── COMPANIES / PARTNERS SECTION ───────────────────────────────────────── */
+
+/* Note: .c-wrapper is shared with Contact.jsx — 
+   Companies uses its own wrapper class below for overrides */
+.companies-wrapper {
+    background: var(--obsidian-3);
+    border-top: 1px solid var(--glass-br);
+    border-bottom: 1px solid var(--glass-br);
+    padding: 2.5rem 0;
+}
+
+.c-container {
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.c-container>img {
+    width: 8rem;
+    filter: grayscale(1) brightness(0.6) invert(0.15);
+    opacity: 0.55;
+    transition: opacity 0.3s, filter 0.3s;
+}
+
+.c-container>img:hover {
+    opacity: 0.9;
+    filter: grayscale(0) brightness(0.9);
+}

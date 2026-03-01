@@ -1,0 +1,77 @@
+/* ─── GET STARTED SECTION ─────────────────────────────────────────────────── */
+.g-wrapper {
+    background: var(--obsidian);
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    position: relative;
+}
+
+.g-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--gold-dim) 40%, var(--gold-dim) 60%, transparent 100%);
+}
+
+.g-container {
+    display: flex;
+    justify-content: center;
+}
+
+.g-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+    max-width: 640px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-br);
+    border-top-color: rgba(201, 169, 110, 0.4);
+    backdrop-filter: blur(14px);
+    padding: 4rem 3rem;
+    position: relative;
+}
+
+.g-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-glow), transparent);
+}
+
+.g-eyebrow {
+    justify-content: center;
+}
+
+.g-heading {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.g-logo-img {
+    height: 200px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0.5rem auto 0 auto;
+}
+
+.g-sub {
+    text-align: center;
+    max-width: 440px;
+}
+
+.g-btn {
+    margin-top: 0.5rem;
+    padding: 14px 40px;
+    font-size: 0.65rem;
+    letter-spacing: 0.38em;
+}

@@ -1,0 +1,133 @@
+/* ─── PROPERTIES PAGE ─────────────────────────────────────────────────────── */
+.props-page {
+    padding-top: 100px;
+    min-height: 100vh;
+    background: var(--obsidian);
+}
+
+.props-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* ── Page Header ─────────────────────────────────────────────────────────── */
+.props-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.props-title {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+}
+
+/* ── Filter Bar ──────────────────────────────────────────────────────────── */
+.props-filter-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.6rem 2rem;
+    background: rgba(201, 169, 110, 0.04);
+    border: 1px solid var(--glass-br);
+    border-top: 1px solid rgba(201, 169, 110, 0.28);
+}
+
+.props-filter-selects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.props-filter-select,
+.props-filter-input {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    background: rgba(8, 8, 8, 0.6);
+    border: 1px solid var(--glass-br);
+    padding: 9px 14px;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: none;
+    min-width: 140px;
+    transition: border-color 0.3s;
+}
+
+.props-filter-select:focus,
+.props-filter-input:focus {
+    border-color: var(--gold);
+    color: var(--cream);
+}
+
+.props-filter-input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.props-clear-btn {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: transparent;
+    border: 1px solid var(--gold-dim);
+    padding: 9px 16px;
+    cursor: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+.props-clear-btn:hover {
+    background: var(--gold);
+    color: var(--obsidian);
+}
+
+.props-fallback-note {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(201, 169, 110, 0.5);
+}
+
+/* ── Featured Section ────────────────────────────────────────────────────── */
+.props-featured-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.props-featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+/* ── Main Grid ───────────────────────────────────────────────────────────── */
+.props-section {}
+
+.props-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+@media (max-width: 640px) {
+    .props-page {
+        padding-top: 80px;
+    }
+
+    .props-filter-selects {
+        flex-direction: column;
+    }
+
+    .props-filter-select,
+    .props-filter-input {
+        width: 100%;
+        min-width: unset;
+    }
+}

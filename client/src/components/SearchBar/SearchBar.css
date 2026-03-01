@@ -1,0 +1,46 @@
+/* ─── HAVEN SEARCH BAR ────────────────────────────────────────────────────── */
+.haven-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(8, 8, 8, 0.6);
+    border: 1px solid var(--glass-br);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 10px 14px;
+    width: 100%;
+}
+
+.haven-search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--cream);
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+}
+
+.haven-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.28);
+    letter-spacing: 0.14em;
+}
+
+.haven-search-btn {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--obsidian);
+    background: var(--gold);
+    border: none;
+    padding: 8px 18px;
+    cursor: none;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+}
+
+.haven-search-btn:hover {
+    opacity: 0.85;
+}

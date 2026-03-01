@@ -1,0 +1,410 @@
+/* ─── FOOTER ──────────────────────────────────────────────────────────────── */
+.f-wrapper {
+    background: #050505;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Scanline texture */
+.f-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 3px,
+            rgba(255, 255, 255, 0.012) 3px,
+            rgba(255, 255, 255, 0.012) 4px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Ambient glow top-left */
+.f-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(201, 169, 110, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ── TOP LINE ── */
+.f-top-line {
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--gold-dim, rgba(201, 169, 110, 0.4)) 40%,
+            var(--gold-dim, rgba(201, 169, 110, 0.4)) 60%,
+            transparent 100%);
+    position: relative;
+    z-index: 1;
+}
+
+/* ── STATS STRIP ── */
+.f-stats-strip {
+    position: relative;
+    z-index: 1;
+    background: rgba(201, 169, 110, 0.04);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.07);
+}
+
+.f-stats-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.4rem;
+    padding-bottom: 1.4rem;
+    gap: 0;
+}
+
+.f-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    flex: 1;
+    position: relative;
+}
+
+.f-stat-divider {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 32px;
+    background: rgba(201, 169, 110, 0.15);
+}
+
+.f-stat-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.7rem;
+    font-weight: 300;
+    color: var(--gold, #C9A96E);
+    line-height: 1;
+    letter-spacing: 0.02em;
+}
+
+.f-stat-label {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 8.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── MID LINE ── */
+.f-mid-line {
+    height: 1px;
+    background: rgba(201, 169, 110, 0.07);
+    position: relative;
+    z-index: 1;
+}
+
+/* ── MAIN GRID ── */
+.f-container {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr 1.2fr;
+    gap: 2.5rem;
+    padding-top: 2.8rem;
+    padding-bottom: 2.8rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── COLUMNS ── */
+.f-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.f-col--brand {
+    gap: 0.85rem;
+}
+
+/* Logo */
+.f-logo-img {
+    height: 72px;
+    width: auto;
+    object-fit: contain;
+    object-position: left center;
+    filter: brightness(1.05);
+}
+
+/* Tagline */
+.f-tagline {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.72rem;
+    line-height: 1.85;
+    color: rgba(255, 255, 255, 0.32);
+    max-width: 240px;
+    margin: 0;
+}
+
+/* Social icons */
+.f-social-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 0.3rem;
+}
+
+.f-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(201, 169, 110, 0.18);
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.35);
+    text-decoration: none;
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
+}
+
+.f-social:hover {
+    color: var(--gold, #C9A96E);
+    border-color: var(--gold, #C9A96E);
+    background: rgba(201, 169, 110, 0.07);
+}
+
+/* Column titles */
+.f-col-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream, #F5F0E8);
+    margin: 0 0 0.2rem;
+    position: relative;
+    padding-bottom: 0.6rem;
+}
+
+.f-col-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 24px;
+    height: 1px;
+    background: var(--gold, #C9A96E);
+}
+
+/* Links */
+.f-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.f-link {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.38);
+    text-decoration: none;
+    transition: color 0.25s, padding-left 0.25s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.f-link:hover {
+    color: var(--gold, #C9A96E);
+    padding-left: 4px;
+}
+
+.f-link--service {
+    cursor: default;
+}
+
+.f-link--service:hover {
+    padding-left: 0;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.f-link-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(201, 169, 110, 0.4);
+    flex-shrink: 0;
+}
+
+/* Contact list */
+.f-contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.f-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+}
+
+.f-contact-icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--gold, #C9A96E);
+    opacity: 0.7;
+}
+
+.f-contact-item span,
+.f-contact-link {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.72rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.35);
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+.f-contact-link:hover {
+    color: var(--gold, #C9A96E);
+}
+
+/* RERA badge */
+.f-rera {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0.6rem;
+    padding: 10px 12px;
+    border: 1px solid rgba(201, 169, 110, 0.14);
+    border-radius: 2px;
+    background: rgba(201, 169, 110, 0.04);
+}
+
+.f-rera-badge {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--gold, #C9A96E);
+    border: 1px solid var(--gold, #C9A96E);
+    padding: 2px 6px;
+    border-radius: 1px;
+    flex-shrink: 0;
+    opacity: 0.85;
+}
+
+.f-rera-text {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.62rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 0.03em;
+}
+
+/* ── BOTTOM BAR ── */
+.f-bottom {
+    border-top: 1px solid rgba(201, 169, 110, 0.07);
+    position: relative;
+    z-index: 1;
+}
+
+.f-bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.f-copyright {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.22em;
+    color: rgba(255, 255, 255, 0.18);
+    text-transform: uppercase;
+}
+
+.f-bottom-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.f-bottom-link {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.18);
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+.f-bottom-link:hover {
+    color: var(--gold, #C9A96E);
+}
+
+.f-bottom-sep {
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 8px;
+}
+
+.f-crafted {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+    .f-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .f-stats-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        padding-top: 1.2rem;
+        padding-bottom: 1.2rem;
+    }
+
+    .f-stat-divider {
+        display: none;
+    }
+
+    .f-stat {
+        align-items: flex-start;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+    }
+
+    .f-container {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .f-bottom-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .f-crafted {
+        display: none;
+    }
+}

@@ -1,0 +1,518 @@
+/* ─── ADMIN NEW PROPERTY PAGE ─────────────────────────────────────────────── */
+.np-page {
+    min-height: 100vh;
+    background: var(--obsidian);
+    padding-top: 100px;
+    padding-bottom: 6rem;
+}
+
+.np-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* ── Page Header ─────────────────────────────────────────────────────────── */
+.np-page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.np-page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+
+/* ── Progress Bar ────────────────────────────────────────────────────────── */
+.np-progress-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.np-progress-bar {
+    height: 2px;
+    background: rgba(201, 169, 110, 0.12);
+    position: relative;
+    overflow: hidden;
+}
+
+.np-progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: var(--gold);
+}
+
+.np-steps-labels {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+}
+
+.np-step-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 80px;
+    padding: 8px 4px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+    cursor: none;
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 8.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.28);
+    transition: color 0.3s;
+    white-space: nowrap;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.np-step-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.np-step-tab--active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+}
+
+.np-step-tab--active .np-step-num {
+    background: var(--gold);
+    color: var(--obsidian);
+    border-color: var(--gold);
+}
+
+.np-step-tab--done {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.np-step-tab--done .np-step-num {
+    background: rgba(201, 169, 110, 0.18);
+    border-color: rgba(201, 169, 110, 0.35);
+    color: var(--gold);
+}
+
+/* ── Panel ───────────────────────────────────────────────────────────────── */
+.np-panel {
+    background: rgba(8, 8, 8, 0.55);
+    border: 1px solid var(--glass-br);
+    border-top: 2px solid var(--gold);
+    padding: 2.5rem;
+    backdrop-filter: blur(12px);
+    min-height: 400px;
+}
+
+.np-step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.np-step-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+}
+
+.np-step-sub {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Form elements ───────────────────────────────────────────────────────── */
+.np-label {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 8.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.np-char-count {
+    color: rgba(201, 169, 110, 0.55);
+}
+
+.np-input {
+    width: 100%;
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.9rem;
+    color: var(--cream);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(201, 169, 110, 0.14);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.3);
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.3s, background 0.3s;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.np-input:focus {
+    border-color: var(--gold);
+    background: rgba(201, 169, 110, 0.04);
+}
+
+.np-input::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+select.np-input {
+    cursor: none;
+}
+
+.np-textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.np-textarea--large {
+    min-height: 220px;
+}
+
+.np-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+}
+
+.np-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.np-col--center {
+    align-items: flex-start;
+}
+
+.np-toggles-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Toggle switch */
+.np-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: none;
+}
+
+.np-toggle-track {
+    width: 38px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(201, 169, 110, 0.2);
+    border-radius: 10px;
+    position: relative;
+    transition: background 0.3s;
+    flex-shrink: 0;
+}
+
+.np-toggle input:checked~.np-toggle-track {
+    background: var(--gold);
+    border-color: var(--gold);
+}
+
+.np-toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s, background 0.3s;
+}
+
+.np-toggle input:checked~.np-toggle-track .np-toggle-thumb {
+    transform: translateX(18px);
+    background: var(--obsidian);
+}
+
+.np-toggle-label {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+/* ── Amenities Grid ──────────────────────────────────────────────────────── */
+.np-amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+    gap: 8px;
+}
+
+.np-amenity-check {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 9px 12px;
+    border: 1px solid rgba(201, 169, 110, 0.12);
+    color: rgba(255, 255, 255, 0.4);
+    cursor: none;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.np-amenity-check--active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201, 169, 110, 0.08);
+}
+
+/* ── Dropzone ────────────────────────────────────────────────────────────── */
+.np-dropzone {
+    border: 1px dashed rgba(201, 169, 110, 0.3);
+    padding: 2rem;
+    text-align: center;
+    cursor: none;
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    transition: border-color 0.3s, background 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.np-dropzone:hover {
+    border-color: var(--gold);
+    background: rgba(201, 169, 110, 0.04);
+}
+
+.np-dropzone u {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+.np-preview-single {
+    max-height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Preview grid */
+.np-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+}
+
+.np-preview-item {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+.np-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.8);
+}
+
+.np-preview-remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
+    background: rgba(8, 8, 8, 0.75);
+    border: none;
+    color: var(--cream);
+    font-size: 14px;
+    cursor: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.np-file-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.np-file-item {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border: 1px solid var(--glass-br);
+}
+
+.np-file-item button {
+    background: none;
+    border: none;
+    color: var(--gold);
+    cursor: none;
+}
+
+/* ── Summary ─────────────────────────────────────────────────────────────── */
+.np-summary {
+    background: rgba(201, 169, 110, 0.04);
+    border: 1px solid rgba(201, 169, 110, 0.15);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.np-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.np-summary-grid>div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.np-summary-grid span {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.np-summary-grid strong {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    color: var(--cream);
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+/* ── Navigation Row ──────────────────────────────────────────────────────── */
+.np-nav-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.np-btn {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    cursor: none;
+}
+
+.np-btn--ghost {
+    background: transparent;
+    border: 1px solid var(--glass-br);
+    color: rgba(255, 255, 255, 0.5);
+    transition: border-color 0.3s, color 0.3s;
+}
+
+.np-btn--ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.np-btn--primary {
+    padding: 12px 32px;
+}
+
+.np-btn--submit {
+    background: var(--gold);
+}
+
+.np-btn--submit:disabled {
+    opacity: 0.55;
+}
+
+/* ── Upload Overlay ──────────────────────────────────────────────────────── */
+.np-upload-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 4, 4, 0.88);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(12px);
+}
+
+.np-upload-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+    width: min(480px, 90vw);
+    padding: 3rem;
+    border: 1px solid var(--glass-br);
+    background: var(--obsidian-2);
+}
+
+.np-upload-bar {
+    width: 100%;
+    height: 2px;
+    background: rgba(201, 169, 110, 0.12);
+    overflow: hidden;
+}
+
+.np-upload-fill {
+    height: 100%;
+    background: var(--gold);
+    width: 0%;
+}
+
+.np-upload-note {
+    text-align: center;
+}
+
+@media (max-width: 640px) {
+    .np-panel {
+        padding: 1.5rem;
+    }
+
+    .np-row {
+        grid-template-columns: 1fr;
+    }
+
+    .np-toggles-row {
+        flex-direction: column;
+    }
+
+    .np-steps-labels {
+        display: none;
+    }
+}

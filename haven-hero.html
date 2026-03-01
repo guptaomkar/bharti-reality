@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HAVEN — Luxury Real Estate</title>
+  <meta name="description"
+    content="HAVEN — Where architecture meets eternity. Discover the world's most extraordinary residences." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --gold: #C9A96E;
+      --gold-dim: rgba(201, 169, 110, 0.18);
+      --gold-glow: rgba(201, 169, 110, 0.45);
+      --obsidian: #080808;
+      --glass-bg: rgba(8, 8, 8, 0.48);
+      --glass-br: rgba(201, 169, 110, 0.22);
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      background: var(--obsidian);
+      overflow: hidden;
+      cursor: none;
+    }
+
+    /* ─── CUSTOM CURSOR ───────────────────────────────────────────────────── */
+    #cursor-dot {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s;
+      box-shadow: 0 0 10px var(--gold-glow);
+      mix-blend-mode: screen;
+    }
+
+    #cursor-ring {
+      position: fixed;
+      width: 38px;
+      height: 38px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: left 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        top 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 0.1s, width 0.2s, height 0.2s;
+      opacity: 0.65;
+    }
+
+    body:hover #cursor-ring {
+      opacity: 1;
+    }
+
+    /* ─── HERO WRAPPER ────────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: var(--obsidian);
+    }
+
+    /* ─── VIDEO LAYER ─────────────────────────────────────────────────────── */
+    #video-wrap {
+      position: absolute;
+      inset: -20px;
+      /* extra room for parallax shift */
+      will-change: transform;
+      transition: transform 0.08s linear;
+    }
+
+    #bg-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+      filter: saturate(0.6) brightness(0.75);
+    }
+
+    /* Fallback gradient when no video is present */
+    #video-fallback {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 30% 40%, #1a1208 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 70% 60%, #0d0a04 0%, transparent 70%),
+        linear-gradient(160deg, #111008 0%, #080808 50%, #0a0c10 100%);
+    }
+
+    /* ─── VIGNETTE ────────────────────────────────────────────────────────── */
+    #vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 100% 100% at 50% 50%,
+          transparent 30%,
+          rgba(0, 0, 0, 0.55) 70%,
+          rgba(0, 0, 0, 0.92) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* ─── LIGHT LEAK ──────────────────────────────────────────────────────── */
+    #light-leak {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      background: linear-gradient(105deg,
+          transparent 0%,
+          rgba(201, 169, 110, 0.04) 30%,
+          rgba(201, 169, 110, 0.09) 45%,
+          rgba(255, 220, 140, 0.06) 50%,
+          rgba(201, 169, 110, 0.04) 55%,
+          transparent 80%);
+      animation: leakShift 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes leakShift {
+      0% {
+        transform: translateX(-30%) skewX(-6deg);
+        opacity: 0.6;
+      }
+
+      50% {
+        transform: translateX(20%) skewX(4deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateX(60%) skewX(-4deg);
+        opacity: 0.7;
+      }
+    }
+
+    /* ─── FILM GRAIN ──────────────────────────────────────────────────────── */
+    #grain {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4;
+      opacity: 0.38;
+      animation: grainAnim 0.14s steps(1) infinite;
+    }
+
+    @keyframes grainAnim {
+
+      0%,
+      100% {
+        background-position: 0 0;
+      }
+
+      10% {
+        background-position: -5% -10%;
+      }
+
+      20% {
+        background-position: -15% 5%;
+      }
+
+      30% {
+        background-position: 7% -25%;
+      }
+
+      40% {
+        background-position: -5% 25%;
+      }
+
+      50% {
+        background-position: -15% 10%;
+      }
+
+      60% {
+        background-position: 15% 0;
+      }
+
+      70% {
+        background-position: 0 15%;
+      }
+
+      80% {
+        background-position: 3% 35%;
+      }
+
+      90% {
+        background-position: -10% 10%;
+      }
+    }
+
+    /* ─── SCANLINES ───────────────────────────────────────────────────────── */
+    #scanlines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      background: repeating-linear-gradient(0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 0, 0, 0.13) 2px,
+          rgba(0, 0, 0, 0.13) 4px);
+      animation: scanMove 8s linear infinite;
+    }
+
+    @keyframes scanMove {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 0 80px;
+      }
+    }
+
+    /* ─── GRID OVERLAY ────────────────────────────────────────────────────── */
+    #grid-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 6;
+      background-image:
+        linear-gradient(rgba(201, 169, 110, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201, 169, 110, 0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      animation: gridDrift 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes gridDrift {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.7;
+      }
+
+      50% {
+        transform: translate(12px, 8px) rotate(0.4deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(-8px, 15px) rotate(-0.3deg);
+        opacity: 0.6;
+      }
+    }
+
+    /* ─── DEPTH LINES ─────────────────────────────────────────────────────── */
+    .depth-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      pointer-events: none;
+      z-index: 7;
+      background: linear-gradient(90deg,
+          transparent 0%,
+          var(--gold-dim) 15%,
+          rgba(201, 169, 110, 0.35) 50%,
+          var(--gold-dim) 85%,
+          transparent 100%);
+    }
+
+    .depth-line:nth-child(1) {
+      top: 28%;
+      animation: depthPulse 4.0s ease-in-out infinite;
+    }
+
+    .depth-line:nth-child(2) {
+      top: 55%;
+      animation: depthPulse 5.5s ease-in-out infinite 1.2s;
+    }
+
+    .depth-line:nth-child(3) {
+      top: 78%;
+      animation: depthPulse 3.8s ease-in-out infinite 2.6s;
+    }
+
+    @keyframes depthPulse {
+
+      0%,
+      100% {
+        opacity: 0.12;
+        transform: scaleX(0.7);
+      }
+
+      50% {
+        opacity: 0.55;
+        transform: scaleX(1.0);
+      }
+    }
+
+    /* ─── PARTICLE CANVAS ─────────────────────────────────────────────────── */
+    #particle-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 8;
+    }
+
+    /* ─── GLASS CARDS ─────────────────────────────────────────────────────── */
+    .prop-card {
+      position: absolute;
+      pointer-events: none;
+      z-index: 9;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-br);
+      backdrop-filter: blur(14px) saturate(1.4);
+      -webkit-backdrop-filter: blur(14px) saturate(1.4);
+      border-radius: 2px;
+      padding: 18px 22px;
+      min-width: 200px;
+      animation: cardFloat var(--dur, 9s) ease-in-out infinite var(--delay, 0s);
+      opacity: 0;
+    }
+
+    .prop-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-glow), transparent);
+    }
+
+    @keyframes cardFloat {
+      0% {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      50% {
+        transform: translateY(-18px);
+        opacity: 1;
+      }
+
+      85% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-55px);
+        opacity: 0;
+      }
+    }
+
+    .card-city {
+      font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.75;
+      margin-bottom: 6px;
+    }
+
+    .card-price {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 22px;
+      color: #e8d5b0;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .card-desc {
+      font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.38);
+      text-transform: uppercase;
+    }
+
+    /* ─── CONTENT LAYER ───────────────────────────────────────────────────── */
+    #content {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 8vw;
+    }
+
+    /* ─── EYEBROW ─────────────────────────────────────────────────────────── */
+    .eyebrow {
+      font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0;
+      margin-bottom: 24px;
+      animation: revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+
+    /* ─── HEADLINE ────────────────────────────────────────────────────────── */
+    .headline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 7vw;
+      line-height: 1.05;
+      color: rgba(240, 232, 215, 0.96);
+      letter-spacing: -0.01em;
+      max-width: 65vw;
+      margin-bottom: 0;
+    }
+
+    .headline .line {
+      display: block;
+      opacity: 0;
+      overflow: hidden;
+    }
+
+    .headline .line:nth-child(1) {
+      animation: revealUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.7s;
+    }
+
+    .headline .line:nth-child(2) {
+      animation: revealUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.95s;
+    }
+
+    .headline .line:nth-child(3) {
+      animation: revealUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.2s;
+    }
+
+    .headline em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* ─── SUBLINE ─────────────────────────────────────────────────────────── */
+    .subline {
+      font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.42);
+      opacity: 0;
+      margin-top: 32px;
+      max-width: 420px;
+      line-height: 1.9;
+      animation: revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.55s;
+    }
+
+    /* ─── CTA ─────────────────────────────────────────────────────────────── */
+    .cta-wrap {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-top: 48px;
+      opacity: 0;
+      animation: revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.85s;
+    }
+
+    .cta-btn {
+      font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--obsidian);
+      background: var(--gold);
+      border: none;
+      padding: 16px 34px;
+      cursor: none;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.08);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .cta-btn:hover::after {
+      opacity: 1;
+    }
+
+    .cta-link {
+      font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: none;
+      transition: color 0.3s;
+    }
+
+    .cta-link span {
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      transition: width 0.3s;
+    }
+
+    .cta-link:hover {
+      color: var(--gold);
+    }
+
+    .cta-link:hover span {
+      width: 48px;
+    }
+
+    /* ─── STAT PANEL ──────────────────────────────────────────────────────── */
+    #stat-panel {
+      position: absolute;
+      top: 50%;
+      right: 6vw;
+      transform: translateY(-50%);
+      z-index: 11;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      opacity: 0;
+      animation: revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 2.2s;
+    }
+
+    .stat-item {
+      text-align: right;
+      position: relative;
+    }
+
+    .stat-item::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 44px;
+      background: linear-gradient(to bottom, transparent, var(--gold-dim), transparent);
+      right: -20px;
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 38px;
+      color: rgba(240, 228, 200, 0.94);
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-label {
+      font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.6;
+      display: block;
+      margin-top: 5px;
+    }
+
+    /* ─── SCROLL INDICATOR ────────────────────────────────────────────────── */
+    #scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 11;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      animation: revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 2.4s;
+    }
+
+    .scroll-label {
+      font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+      writing-mode: horizontal-tb;
+    }
+
+    .scroll-line-wrap {
+      width: 1px;
+      height: 60px;
+      background: rgba(201, 169, 110, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-line-inner {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, var(--gold));
+      animation: breatheLine 2.4s ease-in-out infinite;
+    }
+
+    @keyframes breatheLine {
+      0% {
+        top: -100%;
+        opacity: 0.4;
+      }
+
+      50% {
+        top: 50%;
+        opacity: 1;
+      }
+
+      100% {
+        top: 130%;
+        opacity: 0;
+      }
+    }
+
+    /* ─── NAV HINT ────────────────────────────────────────────────────────── */
+    #nav-hint {
+      position: absolute;
+      top: 36px;
+      left: 8vw;
+      z-index: 12;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.1s;
+    }
+
+    .logo-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 18px;
+      letter-spacing: 0.52em;
+      color: rgba(240, 228, 200, 0.9);
+      text-transform: uppercase;
+    }
+
+    .logo-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.5);
+        opacity: 0.6;
+      }
+    }
+
+    #nav-links {
+      position: absolute;
+      top: 40px;
+      right: 6vw;
+      z-index: 12;
+      display: flex;
+      gap: 36px;
+      opacity: 0;
+      animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+    }
+
+    .nav-link {
+      font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.38);
+      text-decoration: none;
+      cursor: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .nav-link:hover {
+      color: var(--gold);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* ─── REVEAL KEYFRAME ─────────────────────────────────────────────────── */
+    @keyframes revealUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <section id="hero">
+
+    <!-- Video / Fallback -->
+    <div id="video-wrap">
+      <div id="video-fallback"></div>
+      <video id="bg-video" autoplay muted loop playsinline src="travel_video.mp4"></video>
+    </div>
+
+    <!-- Vignette -->
+    <div id="vignette"></div>
+
+    <!-- Light Leak -->
+    <div id="light-leak"></div>
+
+    <!-- Film Grain -->
+    <canvas id="grain"></canvas>
+
+    <!-- Scanlines -->
+    <div id="scanlines"></div>
+
+    <!-- Grid Overlay -->
+    <div id="grid-overlay"></div>
+
+    <!-- Depth Lines -->
+    <div class="depth-line"></div>
+    <div class="depth-line"></div>
+    <div class="depth-line"></div>
+
+    <!-- Particles -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Glass Property Cards -->
+    <div class="prop-card" style="left:72%;bottom:22%;--dur:10s;--delay:0s;">
+      <div class="card-city">Monaco, MC</div>
+      <div class="card-price">€ 24.8M</div>
+      <div class="card-desc">Sea-View Penthouse</div>
+    </div>
+    <div class="prop-card" style="left:8%;bottom:30%;--dur:12s;--delay:2.5s;">
+      <div class="card-city">Dubai, UAE</div>
+      <div class="card-price">AED 68M</div>
+      <div class="card-desc">Palm Frond Residence</div>
+    </div>
+    <div class="prop-card" style="left:55%;bottom:10%;--dur:8.5s;--delay:5s;">
+      <div class="card-city">New York, USA</div>
+      <div class="card-price">$ 19.5M</div>
+      <div class="card-desc">Central Park Tower</div>
+    </div>
+    <div class="prop-card" style="left:78%;bottom:55%;--dur:11s;--delay:1.5s;">
+      <div class="card-city">Côte d'Azur, FR</div>
+      <div class="card-price">€ 38.2M</div>
+      <div class="card-desc">Clifftop Villa</div>
+    </div>
+    <div class="prop-card" style="left:18%;bottom:14%;--dur:9.5s;--delay:3.8s;">
+      <div class="card-city">Maldives</div>
+      <div class="card-price">$ 12M</div>
+      <div class="card-desc">Overwater Estate</div>
+    </div>
+
+    <!-- Nav Logo -->
+    <div id="nav-hint">
+      <span class="logo-text">Haven</span>
+      <span class="logo-dot"></span>
+    </div>
+
+    <!-- Nav Links -->
+    <nav id="nav-links">
+      <a href="#" class="nav-link">Properties</a>
+      <a href="#" class="nav-link">Portfolio</a>
+      <a href="#" class="nav-link">About</a>
+      <a href="#" class="nav-link">Contact</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="content">
+      <div class="eyebrow">Estate · Architecture · Legacy</div>
+      <h1 class="headline">
+        <span class="line">Where Silence</span>
+        <span class="line">Meets <em>Boundless</em></span>
+        <span class="line">Horizon</span>
+      </h1>
+      <p class="subline">Curated residences at the intersection of art and altitude — for those who define their own
+        gravity.</p>
+      <div class="cta-wrap">
+        <button class="cta-btn">Explore Properties</button>
+        <a href="#" class="cta-link"><span></span> View Portfolio</a>
+      </div>
+    </div>
+
+    <!-- Stat Panel -->
+    <div id="stat-panel">
+      <div class="stat-item">
+        <span class="stat-num" data-target="2847" id="stat-props">0</span>
+        <span class="stat-label">Properties</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="62" id="stat-cities">0</span>
+        <span class="stat-label">Cities</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="9" id="stat-rev">0</span>
+        <span class="stat-label">Billion USD</span>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div id="scroll-indicator">
+      <div class="scroll-line-wrap">
+        <div class="scroll-line-inner"></div>
+      </div>
+      <span class="scroll-label">Scroll</span>
+    </div>
+
+  </section>
+
+  <script>
+    // ─── CURSOR ──────────────────────────────────────────────────────────────
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px';
+      dot.style.top = my + 'px';
+      ring.style.left = mx + 'px';
+      ring.style.top = my + 'px';
+    });
+
+    // ─── PARALLAX TILT ───────────────────────────────────────────────────────
+    const videoWrap = document.getElementById('video-wrap');
+    const W = window.innerWidth, H = window.innerHeight;
+    let tiltX = 0, tiltY = 0;
+
+    document.addEventListener('mousemove', e => {
+      const nx = (e.clientX / W - 0.5) * 2; // -1 to 1
+      const ny = (e.clientY / H - 0.5) * 2;
+      tiltX = nx * 11;   // ±11px
+      tiltY = ny * 7;    // ±7px
+    });
+
+    (function animTilt() {
+      videoWrap.style.transform = `translate(${tiltX}px, ${tiltY}px)`;
+      requestAnimationFrame(animTilt);
+    })();
+
+    // ─── FILM GRAIN ──────────────────────────────────────────────────────────
+    (function setupGrain() {
+      const canvas = document.getElementById('grain');
+      const ctx = canvas.getContext('2d');
+      let W, H;
+
+      function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      function drawGrain() {
+        const imageData = ctx.createImageData(W, H);
+        const data = imageData.data;
+        for (let i = 0; i < data.length; i += 4) {
+          const v = (Math.random() * 255) | 0;
+          data[i] = v;
+          data[i + 1] = v;
+          data[i + 2] = v;
+          data[i + 3] = 28; // very low alpha
+        }
+        ctx.putImageData(imageData, 0, 0);
+        setTimeout(drawGrain, 80);
+      }
+      drawGrain();
+    })();
+
+    // ─── PARTICLES ───────────────────────────────────────────────────────────
+    (function setupParticles() {
+      const canvas = document.getElementById('particle-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H;
+
+      function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const PARTICLE_COUNT = 60;
+      const particles = [];
+
+      function randBetween(a, b) { return a + Math.random() * (b - a); }
+
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push({
+          x: randBetween(0, 1),    // 0–1 fraction of W
+          y: randBetween(0, 1),    // start scattered
+          vy: randBetween(0.15, 0.6),
+          size: randBetween(0.8, 2.2),
+          alpha: 0,
+          maxAlpha: randBetween(0.3, 0.75),
+          fadeDir: 1,
+          dead: false,
+        });
+      }
+
+      function tick() {
+        ctx.clearRect(0, 0, W, H);
+
+        for (const p of particles) {
+          // rise upward
+          p.y -= p.vy / H * 1.8;
+          if (p.y < 0) p.y = 1 + Math.random() * 0.05;
+
+          // fade
+          if (p.alpha < p.maxAlpha && p.fadeDir === 1) p.alpha += 0.008;
+          if (p.alpha >= p.maxAlpha) p.fadeDir = -1;
+          if (p.alpha > 0 && p.fadeDir === -1) p.alpha -= 0.004;
+          if (p.alpha <= 0 && p.fadeDir === -1) {
+            p.fadeDir = 1;
+            p.x = Math.random();
+            p.y = 1.02;
+            p.vy = randBetween(0.15, 0.6);
+          }
+
+          // draw as gold dot
+          ctx.beginPath();
+          ctx.arc(p.x * W, p.y * H, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(201,169,110,${p.alpha})`;
+          ctx.fill();
+
+          // tiny glow
+          const grd = ctx.createRadialGradient(p.x * W, p.y * H, 0, p.x * W, p.y * H, p.size * 4);
+          grd.addColorStop(0, `rgba(201,169,110,${p.alpha * 0.25})`);
+          grd.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.arc(p.x * W, p.y * H, p.size * 4, 0, Math.PI * 2);
+          ctx.fillStyle = grd;
+          ctx.fill();
+        }
+
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+
+    // ─── COUNT-UP STATS ───────────────────────────────────────────────────────
+    function countUp(el, target, duration) {
+      const start = performance.now();
+      const isDecimal = target < 50;
+      function step(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        const value = ease * target;
+        el.textContent = isDecimal
+          ? value.toFixed(1)
+          : Math.floor(value).toLocaleString();
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    // Trigger after stat panel animates in (~2.2s)
+    setTimeout(() => {
+      countUp(document.getElementById('stat-props'), 2847, 2200);
+      countUp(document.getElementById('stat-cities'), 62, 1600);
+      countUp(document.getElementById('stat-rev'), 9, 1800);
+    }, 2300);
+
+    // ─── CARD STAGGER (ensure they don't start simultaneously) ─────────────
+    // Cards already use CSS animation-delay via custom property --delay
+    // Nothing else needed here unless you want JS control.
+
+    // ─── RESIZE GUARD ────────────────────────────────────────────────────────
+    window.addEventListener('resize', () => {
+      // particles & grain canvases handle their own resize
+    });
+  </script>
+</body>
+
+</html>

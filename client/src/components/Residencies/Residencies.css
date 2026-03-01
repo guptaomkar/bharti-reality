@@ -1,0 +1,148 @@
+/* ─── RESIDENCIES SECTION ─────────────────────────────────────────────────── */
+.r-wrapper {
+  background: var(--obsidian-2);
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.r-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold-dim) 40%, var(--gold-dim) 60%, transparent 100%);
+}
+
+.r-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.r-head {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+/* ─── FEATURED SECTION ───────────────────────────────────────────────────── */
+.r-featured-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.r-featured-label {
+  opacity: 0.85;
+}
+
+.r-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 16px;
+}
+
+
+.r-featured-item--large {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+}
+
+.r-featured-item--large .r-card-img-wrap {
+  height: 320px;
+}
+
+/* Carousel section */
+.r-carousel-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+/* ─── SWIPER OVERRIDES ──────────────────────────────────────────────────────── */
+.r-carousel-section .swiper {
+  width: 100%;
+  display: block;
+  overflow: visible;
+  /* Prevents box-shadows and scaling effects from clipping */
+  padding: 1rem 0 3rem 0;
+  /* Add padding so hover shadows show */
+}
+
+/* Fix for heavily compressed/squished cards inside swiper */
+.r-carousel-section .swiper-slide {
+  display: flex;
+  /* Makes the card expand to fill the slide height */
+  height: auto;
+  align-items: stretch;
+  flex-shrink: 0;
+  /* Prevents flexbox from crushing the Swiper inline widths */
+}
+
+.r-carousel-section .r-card {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  /* Make card stretch to full slide height */
+}
+
+/* ─── SWIPER NAV BUTTONS ──────────────────────────────────────────────────── */
+.r-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.r-btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--glass-br);
+  background: transparent;
+  color: var(--gold);
+  font-size: 16px;
+  cursor: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.r-btn:hover {
+  background: var(--gold);
+  color: var(--obsidian);
+  border-color: var(--gold);
+}
+
+@media (max-width: 900px) {
+  .r-featured-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .r-featured-item--large {
+    grid-column: 1 / 3;
+  }
+}
+
+@media (max-width: 600px) {
+  .r-featured-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .r-featured-item--large {
+    grid-column: 1;
+  }
+
+  .r-featured-item--large .r-card-img-wrap {
+    height: 220px;
+  }
+}

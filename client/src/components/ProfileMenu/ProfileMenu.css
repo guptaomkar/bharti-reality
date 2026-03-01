@@ -1,0 +1,58 @@
+/* ─── Profile Menu ────────────────────────────────────────────────────────── */
+.pm-avatar {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--gold-dim, rgba(201, 169, 110, 0.25));
+    border: 1.5px solid var(--gold, #C9A96E);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    cursor: none;
+    transition: background 0.3s;
+}
+
+.pm-avatar:hover {
+    background: rgba(201, 169, 110, 0.35);
+}
+
+.pm-admin-dot {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 9px;
+    height: 9px;
+    background: var(--gold);
+    border-radius: 50%;
+    border: 1.5px solid var(--obsidian, #080808);
+}
+
+.pm-user-info {
+    padding: 8px 12px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.pm-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    color: var(--cream, #F0E4C8);
+}
+
+.pm-role {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(201, 169, 110, 0.65);
+}
+
+.pm-item--logout {
+    color: rgba(255, 100, 100, 0.8) !important;
+}

@@ -1,0 +1,299 @@
+.admin-bookings-page {
+    min-height: 100vh;
+    background-color: #080808;
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+}
+
+.ab-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header & Filters */
+.ab-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+    .ab-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+}
+
+.ab-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ab-filter-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.ab-filter-btn:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.ab-filter-btn.active {
+    color: #080808;
+    background: var(--gold);
+}
+
+/* Grid & Cards */
+.ab-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .ab-grid {
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    }
+}
+
+.ab-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.ab-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s ease;
+}
+
+.ab-card:hover {
+    border-color: rgba(201, 169, 110, 0.3);
+}
+
+/* Card Header */
+.ab-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+.ab-prop-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.ab-prop-info {
+    flex: 1;
+}
+
+.ab-prop-title {
+    font-size: 1.1rem;
+    color: white;
+    margin: 0 0 0.25rem 0;
+    font-family: "Cormorant Garamond", serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.ab-prop-city {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Status Badges */
+.ab-status-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge--pending {
+    background: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+    border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.badge--confirmed {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+    border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.badge--completed {
+    background: rgba(201, 169, 110, 0.1);
+    color: var(--gold);
+    border: 1px solid rgba(201, 169, 110, 0.2);
+}
+
+.badge--cancelled {
+    background: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+    border: 1px solid rgba(244, 67, 54, 0.2);
+}
+
+/* Card Body */
+.ab-card-body {
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+.ab-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.ab-label {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.ab-value {
+    color: white;
+    text-align: right;
+}
+
+.ab-date {
+    color: var(--gold);
+    font-weight: 500;
+}
+
+.text-dim {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.8rem;
+}
+
+/* Card Actions */
+.ab-card-actions {
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.ab-status-select {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.ab-status-select:hover,
+.ab-status-select:focus {
+    border-color: var(--gold);
+}
+
+.ab-status-select option {
+    background: #111;
+    color: white;
+}
+
+.ab-icon-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    width: 40px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.ab-icon-btn:hover {
+    background: rgba(201, 169, 110, 0.1);
+    border-color: rgba(201, 169, 110, 0.3);
+    color: var(--gold);
+}
+
+/* Pagination */
+.ab-pagination {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.ab-page-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.ab-page-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.ab-page-btn:not(:disabled):hover {
+    background: rgba(201, 169, 110, 0.1);
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+.ab-page-info {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+}

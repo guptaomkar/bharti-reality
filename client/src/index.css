@@ -1,0 +1,296 @@
+/* ─── HAVEN DESIGN TOKENS ─────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+:root {
+  /* HAVEN palette */
+  --gold: #C9A96E;
+  --gold-dim: rgba(201, 169, 110, 0.18);
+  --gold-glow: rgba(201, 169, 110, 0.45);
+  --gold-bright: rgba(201, 169, 110, 0.85);
+  --obsidian: #080808;
+  --obsidian-2: #0d0d0d;
+  --obsidian-3: #111111;
+  --glass-bg: rgba(8, 8, 8, 0.52);
+  --glass-br: rgba(201, 169, 110, 0.22);
+  --cream: rgba(240, 232, 215, 0.96);
+  --cream-dim: rgba(240, 228, 200, 0.55);
+
+  /* Legacy compat aliases (kept so existing components don't break) */
+  --primary: #C9A96E;
+  --secondary: rgba(240, 228, 200, 0.55);
+  --black: #080808;
+  --blue-gradient: linear-gradient(97.05deg, #C9A96E 3.76%, #a07840 100%);
+  --orange-gradient: linear-gradient(270deg, #C9A96E 0%, #a07840 100%);
+  --blue: #C9A96E;
+  --lightBlue: rgba(201, 169, 110, 0.08);
+  --shadow: 0px 24px 40px -8px rgba(0, 0, 0, 0.65);
+}
+
+/* ─── GLOBAL RESET ────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background: var(--obsidian);
+  color: var(--cream);
+  font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─── HAVEN CURSOR (global fixed elements) ───────────────────────────────── */
+#haven-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  box-shadow: 0 0 10px var(--gold-glow);
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+#haven-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  opacity: 0.65;
+  transition: width 0.2s, height 0.2s;
+  will-change: transform, width, height;
+}
+
+body:hover #haven-cursor-ring {
+  opacity: 1;
+}
+
+/* ─── LAYOUT UTILITIES ────────────────────────────────────────────────────── */
+.wrapper {
+  background-color: var(--obsidian);
+}
+
+.paddings {
+  padding: 1.5rem;
+}
+
+.innerWidth {
+  width: 100%;
+}
+
+.flexCenter {
+  display: flex;
+  row-gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.flexStart {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flexEnd {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flexColCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.flexColStart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.flexColEnd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* ─── TYPOGRAPHY TOKENS ───────────────────────────────────────────────────── */
+.primaryText {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  color: var(--cream);
+  font-size: 2rem;
+}
+
+.secondaryText {
+  font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: var(--cream-dim);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  line-height: 1.75;
+}
+
+.orangeText {
+  font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: var(--gold);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+}
+
+/* HAVEN label — eyebrow label with leading line */
+.haven-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.haven-label::before {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+
+/* HAVEN heading */
+.haven-heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.1;
+}
+
+.haven-heading em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+/* ─── BUTTON ──────────────────────────────────────────────────────────────── */
+.button {
+  font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  color: var(--obsidian);
+  background: var(--gold);
+  border: none;
+  border-radius: 0;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.button:hover::after {
+  opacity: 1;
+}
+
+.button:hover {
+  transform: none;
+}
+
+/* ─── TOASTIFY OVERRIDES ──────────────────────────────────────────────────── */
+.Toastify__toast {
+  background: var(--obsidian-3) !important;
+  border: 1px solid var(--glass-br) !important;
+  color: var(--cream) !important;
+  font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.06em !important;
+}
+
+.Toastify__progress-bar {
+  background: var(--gold) !important;
+}
+
+/* ─── SCROLLBAR ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--obsidian);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dim);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* ─── MEDIA QUERIES ───────────────────────────────────────────────────────── */
+@media (min-width: 1536px) {
+  .innerWidth {
+    max-width: 1280px;
+    margin: auto;
+  }
+}
+
+@media (min-width: 640px) {
+  .paddings {
+    padding: 4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .paddings {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .primaryText {
+    font-size: 1.5rem;
+  }
+
+  .orangeText {
+    font-size: 0.65rem;
+  }
+}

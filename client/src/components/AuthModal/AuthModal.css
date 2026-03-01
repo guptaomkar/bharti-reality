@@ -1,0 +1,177 @@
+/* ─── AUTH MODAL ─────────────────────────────────────────────────────────────── */
+.am-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 4, 4, 0.88);
+    backdrop-filter: blur(14px);
+    z-index: 60000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.am-panel {
+    position: relative;
+    width: min(480px, 92vw);
+    background: var(--obsidian-2, #0f0f0f);
+    border: 1px solid rgba(201, 169, 110, 0.22);
+    border-top: 2px solid var(--gold, #C9A96E);
+    padding: 2.8rem 2.4rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.am-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.35);
+    background: transparent;
+    border: none;
+    cursor: none;
+    transition: color 0.25s;
+    line-height: 1;
+}
+
+.am-close:hover {
+    color: var(--gold);
+}
+
+/* Brand */
+.am-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.am-logo {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(201, 169, 110, 0.5));
+}
+
+/* Tabs */
+.am-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.12);
+}
+
+.am-tab {
+    flex: 1;
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.32);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 10px 0;
+    cursor: none;
+    transition: color 0.25s, border-color 0.25s;
+}
+
+.am-tab--active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+}
+
+/* Form */
+.am-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.am-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.am-label {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 8.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.am-input {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.9rem;
+    color: var(--cream, #F0E4C8);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(201, 169, 110, 0.18);
+    border-bottom-color: rgba(201, 169, 110, 0.4);
+    padding: 10px 12px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+.am-input:focus {
+    border-color: var(--gold);
+    background: rgba(201, 169, 110, 0.04);
+}
+
+.am-input::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.am-submit {
+    margin-top: 4px;
+    width: 100%;
+    text-align: center;
+    padding: 13px;
+    letter-spacing: 0.26em;
+}
+
+.am-submit:disabled {
+    opacity: 0.5;
+}
+
+/* Hint */
+.am-hint {
+    background: rgba(201, 169, 110, 0.04);
+    border: 1px solid rgba(201, 169, 110, 0.12);
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.am-hint-label {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(201, 169, 110, 0.55);
+    margin-bottom: 4px;
+}
+
+.am-hint-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.am-hint-row span {
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.am-hint-row code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 9.5px;
+    color: var(--gold);
+    background: rgba(201, 169, 110, 0.08);
+    padding: 3px 8px;
+    letter-spacing: 0;
+}

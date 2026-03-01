@@ -1,0 +1,104 @@
+/* ─── CONTACT SECTION ─────────────────────────────────────────────────────── */
+.c-wrapper {
+  background: var(--obsidian-2);
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  position: relative;
+}
+
+.c-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold-dim) 40%, var(--gold-dim) 60%, transparent 100%);
+}
+
+.c-container {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Left */
+.c-left {
+  flex: 1;
+  min-width: 280px;
+  max-width: 520px;
+  gap: 1.2rem;
+}
+
+/* Contact modes */
+.contactModes {
+  gap: 1.2rem;
+  margin-top: 0.6rem;
+}
+
+.contactModes .row {
+  gap: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mode {
+  background: var(--obsidian-3);
+  border: 1px solid var(--glass-br);
+  padding: 20px 22px;
+  gap: 14px;
+  min-width: 200px;
+  flex: 1;
+  transition: border-color 0.3s;
+}
+
+.mode:hover {
+  border-color: var(--gold-dim);
+}
+
+.mode .icon {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 50%;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.mode .detail .primaryText {
+  font-size: 1rem !important;
+  font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 400 !important;
+  color: var(--cream) !important;
+  letter-spacing: 0.1em;
+}
+
+.mode .button {
+  margin-top: 12px;
+  align-self: flex-start;
+  width: 100%;
+  text-align: center;
+  padding: 10px 16px;
+}
+
+/* Right */
+.c-right .image-container {
+  border: 1px solid var(--glass-br);
+  overflow: hidden;
+}
+
+.c-right img {
+  width: 100%;
+  max-width: 360px;
+  display: block;
+  filter: brightness(0.7) saturate(0.5);
+}
+
+@media (max-width: 768px) {
+  .c-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}

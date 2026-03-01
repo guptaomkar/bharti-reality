@@ -1,0 +1,11 @@
+/* ─── APP SHELL ───────────────────────────────────────────────────────────── */
+.App {
+  position: relative;
+  overflow-x: hidden;
+  background: var(--obsidian);
+}
+
+/* White-gradient shim kept as no-op so Website.jsx doesn't error */
+.white-gradient {
+  display: none;
+}
