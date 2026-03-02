@@ -28,8 +28,10 @@ app.use(cors({
     "http://localhost:5173",
     "http://localhost:5174",
     "http://localhost:3000",
-    "https://full-stack-real-estate-youtube.vercel.app",
-  ],
+    "https://bharti-reality.onrender.com",
+    "https://bharti-reality-git-main.onrender.com", // Just in case they use preview deployments
+    process.env.CLIENT_URL // Allow dynamic environment variable
+  ].filter(Boolean), // Removes undefined/null if CLIENT_URL is not set
   credentials: true,
 }));
 
