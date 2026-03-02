@@ -83,4 +83,10 @@ router.get(
     })
 );
 
+import { toFav, getAllFav } from "../controllers/userMongooseCntrl.js";
+
+// ── User Favourites ───────────────────────────────────────────────────────────
+router.post("/toFav/:rid", requireAuth, toFav);
+router.get("/allFav", requireAuth, getAllFav);
+
 export { router as authRoute };

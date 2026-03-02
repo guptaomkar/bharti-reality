@@ -10,8 +10,7 @@ import { bookingRoute } from "./routes/bookings.js";
 
 
 // ─── Legacy routes (Prisma-based, kept for backward compat) ──────────────────
-import { userRoute } from "./routes/userRoute.js";
-import { residencyRoute } from "./routes/residencyRoute.js";
+// Removed as part of migration to Mongoose backend
 
 dotenv.config();
 
@@ -124,14 +123,10 @@ app.use("/api/properties", propertyRoute);
 app.use("/api/bookings", bookingRoute);
 
 
-// Legacy routes (kept so existing client still works on this port if needed)
-app.use("/api/user", userRoute);
-app.use("/api/residency", residencyRoute);
-
-
 // ─── Health check ─────────────────────────────────────────────────────────────
 app.get("/api/health", async (_req, res) => {
   const mongoState = mongoose.connection.readyState;
+
   const stateMap = { 0: "disconnected", 1: "connected", 2: "connecting", 3: "disconnecting" };
   res.json({
     status: "ok",
