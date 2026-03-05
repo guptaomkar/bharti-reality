@@ -7,11 +7,11 @@ import { getAllFav } from "../utils/api";
 const useFavourites = () => {
   const { userDetails, setUserDetails } = useContext(UserDetailContext);
   const queryRef = useRef();
-  const { user } = useAuth();
+  const { user, token } = useAuth();
 
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: "allFavourites",
-    queryFn: () => getAllFav(user?.email, userDetails?.token),
+    queryFn: () => getAllFav(user?.email, token),
     onSuccess: (data) =>
       setUserDetails((prev) => ({ ...prev, favourites: data })),
     enabled: !!user,
@@ -22,7 +22,7 @@ const useFavourites = () => {
 
   useEffect(() => {
     queryRef.current && queryRef.current();
-  }, [userDetails?.token]);
+  }, [token]);
 
   return { data, isError, isLoading, refetch };
 };

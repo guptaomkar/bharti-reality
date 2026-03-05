@@ -288,6 +288,59 @@ select.np-input {
     background: rgba(201, 169, 110, 0.08);
 }
 
+/* ── Hero Media Toggle ───────────────────────────────────────────────────── */
+.np-hero-toggle {
+    display: flex;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(201, 169, 110, 0.18);
+    padding: 4px;
+    border-radius: 6px;
+    width: fit-content;
+}
+
+.np-hero-opt {
+    flex: 0 0 auto;
+    padding: 8px 18px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.np-hero-opt:hover {
+    color: var(--gold);
+    border-color: rgba(201, 169, 110, 0.2);
+}
+
+.np-hero-opt--active {
+    background: rgba(201, 169, 110, 0.14);
+    border-color: rgba(201, 169, 110, 0.45);
+    color: var(--gold);
+}
+
+.np-input--error {
+    border-color: rgba(248, 113, 113, 0.6) !important;
+}
+
+.np-yt-error {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: #f87171;
+}
+
+.np-yt-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
 /* ── Dropzone ────────────────────────────────────────────────────────────── */
 .np-dropzone {
     border: 1px dashed rgba(201, 169, 110, 0.3);

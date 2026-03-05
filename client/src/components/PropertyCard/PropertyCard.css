@@ -51,6 +51,28 @@
       rgba(8, 8, 8, 0.72) 100%);
 }
 
+/* ── Heart Favourite ────────────────────────────────────────────────────────── */
+.r-card-heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 4;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+
+.r-card-heart:hover {
+  background: rgba(0, 0, 0, 0.65);
+}
+
 /* ── Badges ────────────────────────────────────────────────────────────────── */
 .r-card-badges {
   position: absolute;

@@ -6,7 +6,7 @@ import { PuffLoader } from "react-spinners";
 import dayjs from "dayjs";
 import { IoCheckmarkCircle, IoCloseCircle, IoTime } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import "../Admin/AdminBookings.css";
+import "./Bookings.css";
 
 const STATUS_ICONS = {
   pending: <IoTime className="ab-status-icon ab-status--pending" />,

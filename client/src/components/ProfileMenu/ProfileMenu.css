@@ -32,27 +32,64 @@
     border: 1.5px solid var(--obsidian, #080808);
 }
 
+.pm-dropdown {
+    background: var(--obsidian-2, #121212) !important;
+    border: 1px solid var(--glass-br, rgba(201, 169, 110, 0.2)) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
+    padding: 4px !important;
+}
+
 .pm-user-info {
-    padding: 8px 12px 4px;
+    padding: 12px 16px 8px;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
+    border-bottom: 1px solid var(--glass-br);
+    margin-bottom: 4px;
 }
 
 .pm-name {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
     color: var(--cream, #F0E4C8);
 }
 
 .pm-role {
     font-family: 'Neue Haas Grotesk', 'Helvetica Neue', sans-serif;
-    font-size: 8px;
-    letter-spacing: 0.3em;
+    font-size: 9px;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: rgba(201, 169, 110, 0.65);
+    color: var(--gold);
+    opacity: 0.7;
+}
+
+.pm-item {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--cream) !important;
+    padding: 10px 16px !important;
+    border-radius: 4px !important;
+    transition: all 0.2s ease !important;
+}
+
+.pm-item:hover {
+    background: var(--gold-dim, rgba(201, 169, 110, 0.15)) !important;
+    color: var(--gold) !important;
 }
 
 .pm-item--logout {
-    color: rgba(255, 100, 100, 0.8) !important;
+    color: #ff5f5f !important;
+    margin-top: 4px;
+}
+
+.pm-item--logout:hover {
+    background: rgba(255, 95, 95, 0.1) !important;
+    color: #ff5f5f !important;
+}
+
+/* Divider styling */
+.pm-dropdown hr {
+    border-top: 1px solid var(--glass-br) !important;
+    margin: 4px 0 !important;
 }

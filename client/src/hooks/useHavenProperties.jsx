@@ -39,7 +39,7 @@ const useHavenProperties = (filters = {}) => {
         country: p.location?.country || p.country || "",
         address: p.location?.address || p.address || "",
         price: typeof p.price === "object" ? (p.price?.amount ?? p.price) : p.price,
-        priceObj: typeof p.price === "object" ? p.price : { amount: p.price, currency: "USD", priceType: "for-sale" },
+        priceObj: typeof p.price === "object" ? p.price : { amount: p.price, currency: "INR", priceType: "for-sale" },
         facilities: {
             bedrooms: p.details?.bedrooms || p.facilities?.bedrooms || 0,
             bathrooms: p.details?.bathrooms || p.facilities?.bathrooms || 0,

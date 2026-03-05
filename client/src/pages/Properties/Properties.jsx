@@ -107,14 +107,14 @@ const Properties = () => {
             <input
               className="props-filter-input"
               type="number"
-              placeholder="Min Price ($)"
+              placeholder="Min Price (₹)"
               value={filters.minPrice || ""}
               onChange={(e) => handleFilter("minPrice", e.target.value)}
             />
             <input
               className="props-filter-input"
               type="number"
-              placeholder="Max Price ($)"
+              placeholder="Max Price (₹)"
               value={filters.maxPrice || ""}
               onChange={(e) => handleFilter("maxPrice", e.target.value)}
             />

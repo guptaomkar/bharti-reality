@@ -1,0 +1,67 @@
+/* ── Favourites Page ──────────────────────────────────────────────────────── */
+
+.fav-page {
+    min-height: 60vh;
+}
+
+.fav-header {
+    text-align: center;
+    padding-bottom: 2.5rem;
+    padding-top: 2rem;
+}
+
+.fav-main-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    margin: 0.5rem 0 0.4rem;
+}
+
+/* ── Login Prompt ────────────────────────────────────────────────────────── */
+.fav-login-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.fav-heart-big {
+    font-size: 3.5rem;
+    opacity: 0.4;
+}
+
+.fav-title {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin: 0;
+}
+
+.fav-sub {
+    max-width: 340px;
+}
+
+.fav-login-btn {
+    margin-top: 0.5rem;
+}
+
+/* ── Empty State ──────────────────────────────────────────────────────────── */
+.fav-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.fav-empty-icon {
+    font-size: 3.5rem;
+    opacity: 0.3;
+}
+
+.fav-empty-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--cream);
+    margin: 0;
+}

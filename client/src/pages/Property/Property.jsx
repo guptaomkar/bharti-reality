@@ -13,8 +13,9 @@ import { FaParking, FaPhone, FaEnvelope, FaCheckCircle } from "react-icons/fa";
 import { MdLocationPin, MdCalendarToday } from "react-icons/md";
 import { AiOutlineExpand } from "react-icons/ai";
 
-
+import CinematicHero from "../../components/CinematicHero/CinematicHero";
 import BookingModal from "../../components/BookingModal/BookingModal";
+import Heart from "../../components/Heart/Heart";
 import useAuthCheck from "../../hooks/useAuthCheck";
 import { useAuth } from "../../context/AuthContext";
 import UserDetailContext from "../../context/UserDetailContext";
@@ -24,7 +25,7 @@ const STATUS_LABEL = { "for-sale": "For Sale", "for-rent": "For Rent", "sold": "
 const formatPrice = (p) => {
   if (!p) return "Price on request";
   const val = typeof p === "object" ? p.amount : p;
-  const sym = { USD: "$", EUR: "€", AED: "AED", GBP: "£" }[p.currency || "USD"] || "$";
+  const sym = { INR: "₹", USD: "$", EUR: "€", AED: "AED", GBP: "£" }[p.currency || "INR"] || "₹";
   const suffix = (p.priceType || p.status) === "for-rent" ? "/mo" : "";
   if (val >= 1_000_000) return `${sym}${(val / 1_000_000).toFixed(1)}M${suffix}`;
   if (val >= 1_000) return `${sym}${(val / 1_000).toFixed(0)}K${suffix}`;
@@ -97,8 +98,8 @@ const Property = () => {
   // Booking
   const [modalOpened, setModalOpened] = useState(false);
   const { validateLogin } = useAuthCheck();
-  const { user } = useAuth();
-  const { userDetails: { token, bookings } } = useContext(UserDetailContext);
+  const { user, token } = useAuth();
+  const { userDetails: { bookings } } = useContext(UserDetailContext);
 
   // Fetch from new API, fall back to static
   const { data: apiData, isLoading, isError } = useQuery(
@@ -140,6 +141,10 @@ const Property = () => {
     amenities: raw.amenities || [],
     agent: raw.agent || {},
     videos: raw.media?.videos || [],
+    // Cinematic hero
+    heroMediaType: raw.media?.heroMediaType || "photo",
+    heroMediaUrl: raw.media?.heroMediaUrl || "",
+    virtualTourUrl: raw.media?.virtualTourUrl || "",
   } : null;
 
   const [descExpanded, setDescExpanded] = useState(false);
@@ -175,45 +180,60 @@ const Property = () => {
       )}
 
       {/* ── Hero Section ──────────────────────────────────────────────────── */}
-      <section className="prop-hero" ref={heroRef}>
-        <motion.div className="prop-hero-bg" style={{ y: yBg }}>
-          <img
-            src={data.coverImage}
-            alt={data.title}
-            className="prop-hero-img"
-          />
-        </motion.div>
-        <div className="prop-hero-vignette" />
+      {(data.heroMediaType === "video" || data.heroMediaType === "youtube") && data.heroMediaUrl ? (
+        <CinematicHero
+          heroMediaType={data.heroMediaType}
+          heroMediaUrl={data.heroMediaUrl}
+          title={data.title}
+          priceFormatted={data.priceFormatted}
+          type={data.type}
+          statusLabel={data.statusLabel}
+          neighborhood={data.neighborhood}
+          city={data.city}
+          onBookVisit={() => validateLogin() && setModalOpened(true)}
+          activeBooking={bookings?.find((b) => b.id === propertyId && b.status !== "cancelled")}
+        />
+      ) : (
+        <section className="prop-hero" ref={heroRef}>
+          <motion.div className="prop-hero-bg" style={{ y: yBg }}>
+            <img
+              src={data.coverImage}
+              alt={data.title}
+              className="prop-hero-img"
+            />
+          </motion.div>
+          <div className="prop-hero-vignette" />
 
-        {/* Overlay content */}
-        <motion.div className="prop-hero-content" style={{ opacity }}>
-          {/* Back nav */}
-          <Link to="/properties" className="prop-back">
-            <IoArrowBackOutline /> All Properties
-          </Link>
+          {/* Overlay content */}
+          <motion.div className="prop-hero-content" style={{ opacity }}>
+            {/* Back nav */}
+            <Link to="/properties" className="prop-back">
+              <IoArrowBackOutline /> All Properties
+            </Link>
 
-          <div className="prop-hero-bottom">
-            <div className="prop-hero-badges">
-              {data.type && <span className="prop-badge prop-badge--type">{data.type}</span>}
-              {data.statusLabel && <span className="prop-badge prop-badge--status">{data.statusLabel}</span>}
+            <div className="prop-hero-bottom">
+              <div className="prop-hero-badges">
+                {data.type && <span className="prop-badge prop-badge--type">{data.type}</span>}
+                {data.statusLabel && <span className="prop-badge prop-badge--status">{data.statusLabel}</span>}
+              </div>
+              <h1 className="prop-hero-title">{data.title}</h1>
+              <div className="prop-hero-meta">
+                <span className="prop-hero-price">{data.priceFormatted}</span>
+                {data.neighborhood && (
+                  <span className="prop-hero-location">
+                    <MdLocationPin /> {data.neighborhood}, {data.city}
+                  </span>
+                )}
+              </div>
             </div>
-            <h1 className="prop-hero-title">{data.title}</h1>
-            <div className="prop-hero-meta">
-              <span className="prop-hero-price">{data.priceFormatted}</span>
-              {data.neighborhood && (
-                <span className="prop-hero-location">
-                  <MdLocationPin /> {data.neighborhood}, {data.city}
-                </span>
-              )}
-            </div>
-          </div>
 
-          {/* Gallery trigger */}
-          <button className="prop-gallery-trigger" onClick={() => openLightbox(0)}>
-            <AiOutlineExpand /> View {allPhotos.length} Photos
-          </button>
-        </motion.div>
-      </section>
+            {/* Gallery trigger */}
+            <button className="prop-gallery-trigger" onClick={() => openLightbox(0)}>
+              <AiOutlineExpand /> View {allPhotos.length} Photos
+            </button>
+          </motion.div>
+        </section>
+      )}
 
       {/* ── Photo Gallery ─────────────────────────────────────────────────── */}
       {allPhotos.length > 1 && (
@@ -351,6 +371,30 @@ const Property = () => {
             </div>
           )}
 
+          {/* Virtual Tour */}
+          {data.virtualTourUrl && (
+            <div className="prop-vt-section">
+              <h2 className="haven-heading prop-section-title">Virtual Tour</h2>
+              <div className="prop-vt-wrap">
+                <iframe
+                  src={
+                    data.virtualTourUrl.includes("youtube.com") || data.virtualTourUrl.includes("youtu.be")
+                      ? `https://www.youtube.com/embed/${data.virtualTourUrl.match(/[?&]v=([^&]+)/)?.[1] ||
+                      data.virtualTourUrl.match(/youtu\.be\/([^?&]+)/)?.[1] ||
+                      data.virtualTourUrl.match(/embed\/([^?&]+)/)?.[1] ||
+                      ""
+                      }`
+                      : data.virtualTourUrl
+                  }
+                  title="Virtual Tour"
+                  allowFullScreen
+                  className="prop-vt-iframe"
+                />
+              </div>
+            </div>
+          )}
+
+
           {/* Location */}
           <div className="prop-location-section">
             <h2 className="haven-heading prop-section-title">Location</h2>
@@ -378,6 +422,12 @@ const Property = () => {
                   <span className="prop-agent-license">Lic. {data.agent.license}</span>
                 )}
               </div>
+            </div>
+
+            {/* Favourite Heart */}
+            <div className="prop-heart-row">
+              <Heart id={raw?._id || raw?.id || propertyId} />
+              <span className="prop-heart-label">Save to Favourites</span>
             </div>
 
             <div className="prop-agent-contacts">

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { AiFillHeart } from "react-icons/ai"
 import useAuthCheck from "../../hooks/useAuthCheck"
-import { useMutation } from "react-query"
+import { useMutation, useQueryClient } from "react-query"
 import { useAuth } from "../../context/AuthContext"
 import UserDetailContext from "../../context/UserDetailContext"
 import { checkFavourites, updateFavourites } from "../../utils/common"
@@ -11,10 +11,11 @@ const Heart = ({ id }) => {
 
     const [heartColor, setHeartColor] = useState("white")
     const { validateLogin } = useAuthCheck()
-    const { user } = useAuth()
+    const { user, token } = useAuth()
+    const queryClient = useQueryClient()
 
     const {
-        userDetails: { favourites, token },
+        userDetails: { favourites },
         setUserDetails,
     } = useContext(UserDetailContext);
 
@@ -25,13 +26,14 @@ const Heart = ({ id }) => {
 
     const { mutate } = useMutation({
         mutationFn: () => toFav(id, user?.email, token),
-        onSuccess: () => {
+        onSuccess: (data) => {
             setUserDetails((prev) => (
                 {
                     ...prev,
-                    favourites: updateFavourites(id, prev.favourites)
+                    favourites: data.favResidenciesID || prev.favourites
                 }
             ))
+            queryClient.invalidateQueries(["favIds", user?.email])
         }
     })
 

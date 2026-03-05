@@ -5,6 +5,7 @@ import { IoBedOutline, IoWaterOutline } from "react-icons/io5";
 import { BsGridFill } from "react-icons/bs";
 import { FaParking } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Heart from "../Heart/Heart";
 
 // Status badge colours
 const STATUS_LABELS = {
@@ -69,6 +70,11 @@ const PropertyCard = ({ card, index = 0 }) => {
           loading="lazy"
         />
         <div className="r-card-img-overlay" />
+
+        {/* Heart favourite */}
+        <div className="r-card-heart" onClick={(e) => e.stopPropagation()}>
+          <Heart id={card._id || card.id || card.slug} />
+        </div>
 
         {/* Badges */}
         <div className="r-card-badges">

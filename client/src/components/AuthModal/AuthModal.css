@@ -8,6 +8,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow-y: auto;
+    padding: 2rem 0;
 }
 
 .am-panel {
@@ -20,6 +22,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
+    margin: auto;
 }
 
 .am-close {

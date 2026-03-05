@@ -15,10 +15,15 @@ const BookingSchema = new Schema(
             name: { type: String, required: true },
             email: { type: String, required: true },
         },
+        // Extended visit booking fields
+        mobile: { type: String, default: "" },
+        homeAddress: { type: String, default: "" },
+        timeSlot: { type: String, enum: ["Morning", "Afternoon", "Evening"], default: "Morning" },
+        notes: { type: String, default: "" },
         visitDate: { type: Date, required: true },
         status: {
             type: String,
-            enum: ["pending", "confirmed", "cancelled", "completed"],
+            enum: ["pending", "confirmed", "cancelled", "completed", "rejected"],
             default: "pending",
         },
         adminNote: { type: String, default: "" },

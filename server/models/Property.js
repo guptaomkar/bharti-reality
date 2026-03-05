@@ -48,6 +48,8 @@ const MediaSchema = new Schema({
   videos: [{ type: String }],
   floorPlans: [{ type: String }],
   virtualTourUrl: { type: String },
+  heroMediaType: { type: String, enum: ["photo", "video", "youtube"], default: "photo" },
+  heroMediaUrl:  { type: String, default: "" },
 }, { _id: false });
 
 const AgentSchema = new Schema({

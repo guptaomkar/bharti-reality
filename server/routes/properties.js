@@ -115,6 +115,15 @@ router.post("/", uploadFields, handleUploadError, asyncHandler(async (req, res) 
             `${req.protocol}://${req.get("host")}/uploads/floorplans/${f.filename}`
         ),
         virtualTourUrl: body.virtualTourUrl || "",
+        heroMediaType: body.heroMediaType || "photo",
+        heroMediaUrl: (() => {
+            if (body.heroMediaUrl) return body.heroMediaUrl;
+            // For video type, use the first uploaded video as the hero
+            if (body.heroMediaType === "video" && files.videos?.[0]) {
+                return `${req.protocol}://${req.get("host")}/uploads/videos/${files.videos[0].filename}`;
+            }
+            return "";
+        })(),
     };
 
     const property = new Property({

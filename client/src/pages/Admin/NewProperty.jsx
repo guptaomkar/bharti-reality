@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+﻿import React, { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "./NewProperty.css";
 import { motion, AnimatePresence } from "framer-motion";
@@ -32,7 +32,7 @@ const PRICE_TYPES = ["for-sale", "for-rent", "per-night"];
 const initForm = {
     // Step 1
     title: "", type: "apartment", category: "residential", status: "for-sale",
-    featured: false, priceAmount: "", priceCurrency: "USD", priceType: "for-sale",
+    featured: false, priceAmount: "", priceCurrency: "INR", priceType: "for-sale",
     // Step 2
     address: "", city: "", state: "", country: "", zipCode: "", neighborhood: "",
     // Step 3
@@ -44,6 +44,8 @@ const initForm = {
     amenities: [],
     // Step 6 — file refs managed separately
     virtualTourUrl: "",
+    heroMediaType: "photo", // "photo" | "video" | "youtube"
+    youtubeUrl: "",
     // Step 7
     agentName: "", agentPhone: "", agentEmail: "", agentLicense: "",
 };
@@ -70,6 +72,23 @@ const Property = () => {
     const floorRef = useRef();
 
     const set = (key, val) => setForm((f) => ({ ...f, [key]: val }));
+
+    // ── YouTube URL parser ────────────────────────────────────────────────────
+    const extractYouTubeId = (url) => {
+        const patterns = [
+            /(?:youtube\.com\/watch\?.*v=)([^&]+)/,
+            /(?:youtu\.be\/)([^?&]+)/,
+            /(?:youtube\.com\/embed\/)([^?&]+)/,
+        ];
+        for (const p of patterns) {
+            const m = url.match(p);
+            if (m) return m[1];
+        }
+        return null;
+    };
+
+    const ytId = form.heroMediaType === "youtube" ? extractYouTubeId(form.youtubeUrl || "") : null;
+    const ytError = form.heroMediaType === "youtube" && form.youtubeUrl && !ytId;
 
     // ── Navigate ──────────────────────────────────────────────────────────────
     const next = () => setStep((s) => Math.min(s + 1, STEPS.length - 1));
@@ -132,6 +151,17 @@ const Property = () => {
             name: form.agentName, phone: form.agentPhone,
             email: form.agentEmail, license: form.agentLicense,
         }));
+
+        // Hero media
+        fd.append("heroMediaType", form.heroMediaType);
+        if (form.heroMediaType === "youtube" && ytId) {
+            fd.append("heroMediaUrl", `https://www.youtube.com/embed/${ytId}`);
+        } else if (form.heroMediaType === "video" && videos.length > 0) {
+            // heroMediaUrl will be set server-side from uploaded video
+            fd.append("heroMediaUrl", "");
+        } else {
+            fd.append("heroMediaUrl", "");
+        }
 
         // Files
         if (coverImage) fd.append("coverImage", coverImage);
@@ -198,7 +228,7 @@ const Property = () => {
                         <div className="np-col">
                             <label className={labelCls}>Currency</label>
                             <select className={inputCls} value={form.priceCurrency} onChange={(e) => set("priceCurrency", e.target.value)}>
-                                {["USD", "EUR", "GBP", "AED"].map((c) => <option key={c} value={c}>{c}</option>)}
+                                {["INR", "USD", "EUR", "GBP", "AED"].map((c) => <option key={c} value={c}>{c}</option>)}
                             </select>
                         </div>
                         <div className="np-col">
@@ -315,17 +345,76 @@ const Property = () => {
                 <div className="np-step-content">
                     <h2 className="np-step-title">Media</h2>
 
-                    {/* Cover Image */}
-                    <label className={labelCls}>Cover Image</label>
-                    <div className="np-dropzone" {...makeDrop((f) => setCoverImage(f[0] || f), false)} onClick={() => coverRef.current?.click()}>
-                        {coverImage
-                            ? <img src={URL.createObjectURL(coverImage)} alt="Cover" className="np-preview-single" />
-                            : <span>Drag & drop or <u>browse</u></span>}
-                        <input ref={coverRef} type="file" accept="image/*" style={{ display: "none" }} onChange={(e) => setCoverImage(e.target.files[0])} />
+                    {/* Hero Media Type Toggle */}
+                    <label className={labelCls}>Hero Showcase</label>
+                    <div className="np-hero-toggle">
+                        {[["photo", "Photo"], ["video", "Video"], ["youtube", "YouTube"]].map(([val, label]) => (
+                            <button
+                                key={val}
+                                type="button"
+                                className={`np-hero-opt ${form.heroMediaType === val ? "np-hero-opt--active" : ""}`}
+                                onClick={() => set("heroMediaType", val)}
+                            >
+                                {label}
+                            </button>
+                        ))}
                     </div>
 
-                    {/* Photos */}
-                    <label className={labelCls}>Gallery Photos (max 20)</label>
+                    {/* Photo option */}
+                    {form.heroMediaType === "photo" && (
+                        <>
+                            <label className={labelCls}>Cover Image</label>
+                            <div className="np-dropzone" {...makeDrop((f) => setCoverImage(f[0] || f), false)} onClick={() => coverRef.current?.click()}>
+                                {coverImage
+                                    ? <img src={URL.createObjectURL(coverImage)} alt="Cover" className="np-preview-single" />
+                                    : <span>Drag & drop or <u>browse</u></span>}
+                                <input ref={coverRef} type="file" accept="image/*" style={{ display: "none" }} onChange={(e) => setCoverImage(e.target.files[0])} />
+                            </div>
+                        </>
+                    )}
+
+                    {/* Video option */}
+                    {form.heroMediaType === "video" && (
+                        <>
+                            <label className={labelCls}>Hero Video (cinematic)</label>
+                            <div className="np-dropzone" {...makeDrop((newFiles) => setVideos((p) => [...p, ...newFiles]))} onClick={() => videosRef.current?.click()}>
+                                <span>Drag & drop video or <u>browse</u></span>
+                                <input ref={videosRef} type="file" accept="video/*" multiple style={{ display: "none" }} onChange={(e) => setVideos((p) => [...p, ...Array.from(e.target.files)])} />
+                            </div>
+                            {videos.length > 0 && <div className="np-file-list">{videos.map((f, i) => <div key={i} className="np-file-item">{f.name} <button onClick={() => setVideos(p => p.filter((_, j) => j !== i))}>x</button></div>)}</div>}
+                        </>
+                    )}
+
+                    {/* YouTube option */}
+                    {form.heroMediaType === "youtube" && (
+                        <>
+                            <label className={labelCls}>YouTube URL</label>
+                            <input
+                                className={`${inputCls}${ytError ? " np-input--error" : ""}`}
+                                value={form.youtubeUrl || ""}
+                                onChange={(e) => set("youtubeUrl", e.target.value)}
+                                placeholder="https://www.youtube.com/watch?v=... or https://youtu.be/..."
+                            />
+                            {ytError && <span className="np-yt-error">Please enter a valid YouTube URL</span>}
+                            {ytId && (
+                                <div className="np-yt-preview">
+                                    <span className="np-label">Live Preview</span>
+                                    <iframe
+                                        width="100%"
+                                        height="280"
+                                        src={`https://www.youtube.com/embed/${ytId}`}
+                                        title="YouTube Preview"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                        style={{ border: "1px solid rgba(201,169,110,0.25)", borderRadius: "8px", marginTop: "0.5rem" }}
+                                    />
+                                </div>
+                            )}
+                        </>
+                    )}
+
+                    {/* Gallery Photos */}
+                    <label className={labelCls} style={{ marginTop: "1.25rem" }}>Gallery Photos (max 20)</label>
                     <div className="np-dropzone" {...makeDrop((newFiles) => setPhotos((p) => [...p, ...newFiles]))} onClick={() => photosRef.current?.click()}>
                         <span>Drag & drop photos or <u>browse</u></span>
                         <input ref={photosRef} type="file" accept="image/*" multiple style={{ display: "none" }} onChange={(e) => setPhotos((p) => [...p, ...Array.from(e.target.files)])} />
@@ -335,19 +424,11 @@ const Property = () => {
                             {photos.map((f, i) => (
                                 <div key={i} className="np-preview-item">
                                     <img src={URL.createObjectURL(f)} alt={f.name} />
-                                    <button className="np-preview-remove" onClick={() => setPhotos((p) => p.filter((_, j) => j !== i))}>×</button>
+                                    <button className="np-preview-remove" onClick={() => setPhotos((p) => p.filter((_, j) => j !== i))}>x</button>
                                 </div>
                             ))}
                         </div>
                     )}
-
-                    {/* Videos */}
-                    <label className={labelCls}>Videos (max 5)</label>
-                    <div className="np-dropzone" {...makeDrop((newFiles) => setVideos((p) => [...p, ...newFiles]))} onClick={() => videosRef.current?.click()}>
-                        <span>Drag & drop videos or <u>browse</u></span>
-                        <input ref={videosRef} type="file" accept="video/*" multiple style={{ display: "none" }} onChange={(e) => setVideos((p) => [...p, ...Array.from(e.target.files)])} />
-                    </div>
-                    {videos.length > 0 && <div className="np-file-list">{videos.map((f, i) => <div key={i} className="np-file-item">{f.name} <button onClick={() => setVideos(p => p.filter((_, j) => j !== i))}>×</button></div>)}</div>}
 
                     {/* Floor Plans */}
                     <label className={labelCls}>Floor Plans (max 4)</label>
@@ -358,7 +439,7 @@ const Property = () => {
 
                     {/* Virtual Tour URL */}
                     <label className={labelCls}>Virtual Tour URL</label>
-                    <input className={inputCls} value={form.virtualTourUrl} onChange={(e) => set("virtualTourUrl", e.target.value)} placeholder="https://…" />
+                    <input className={inputCls} value={form.virtualTourUrl} onChange={(e) => set("virtualTourUrl", e.target.value)} placeholder="https://..." />
                 </div>
             );
 

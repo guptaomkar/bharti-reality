@@ -11,7 +11,7 @@ router.post(
     "/",
     requireAuth,
     asyncHandler(async (req, res) => {
-        const { propertyId, visitDate } = req.body;
+        const { propertyId, visitDate, mobile, homeAddress, timeSlot, notes } = req.body;
         if (!propertyId || !visitDate)
             return res.status(400).json({ message: "propertyId and visitDate are required" });
 
@@ -26,15 +26,6 @@ router.post(
 
         if (!property)
             return res.status(404).json({ message: "Property not found" });
-
-        // Prevent duplicate booking for same property + user
-        const existing = await Booking.findOne({
-            "user.id": req.userId,
-            "property.id": propertyId,
-            status: { $nin: ["cancelled"] },
-        });
-        if (existing)
-            return res.status(409).json({ message: "You already have an active booking for this property" });
 
         // Get user info from DB
         const { default: User } = await import("../models/User.js");
@@ -53,6 +44,10 @@ router.post(
                 email: user.email,
             },
             visitDate: date,
+            mobile: mobile || "",
+            homeAddress: homeAddress || "",
+            timeSlot: timeSlot || "Morning",
+            notes: notes || "",
         });
 
         res.status(201).json({ message: "Booking confirmed!", booking });
@@ -93,9 +88,32 @@ router.get(
     requireAuth,
     requireAdmin,
     asyncHandler(async (req, res) => {
-        const { status, page = 1, limit = 20 } = req.query;
+        const { status, page = 1, limit = 20, search, dateFrom, dateTo, property } = req.query;
         const query = {};
+
         if (status) query.status = status;
+        if (property) query["property.title"] = { $regex: property, $options: "i" };
+
+        // Date range filter
+        if (dateFrom || dateTo) {
+            query.visitDate = {};
+            if (dateFrom) query.visitDate.$gte = new Date(dateFrom);
+            if (dateTo) {
+                const toDate = new Date(dateTo);
+                toDate.setHours(23, 59, 59, 999);
+                query.visitDate.$lte = toDate;
+            }
+        }
+
+        // Search by name, email, or mobile
+        if (search) {
+            const re = { $regex: search, $options: "i" };
+            query.$or = [
+                { "user.name": re },
+                { "user.email": re },
+                { mobile: re },
+            ];
+        }
 
         const total = await Booking.countDocuments(query);
         const bookings = await Booking.find(query)
@@ -115,7 +133,7 @@ router.patch(
     requireAdmin,
     asyncHandler(async (req, res) => {
         const { status, adminNote } = req.body;
-        const allowed = ["pending", "confirmed", "cancelled", "completed"];
+        const allowed = ["pending", "confirmed", "cancelled", "completed", "rejected"];
         if (!allowed.includes(status))
             return res.status(400).json({ message: `Status must be one of: ${allowed.join(", ")}` });
 

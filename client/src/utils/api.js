@@ -43,13 +43,13 @@ export const createProperty = async (formData) => {
   return res.data;
 };
 
-/** POST /api/bookings — create a booking */
-export const bookVisit = async (date, propertyId) => {
+/** POST /api/bookings — create a booking (full visit form payload) */
+export const bookVisit = async ({ propertyId, visitDate, mobile, homeAddress, timeSlot, notes, fullName }) => {
   const token = localStorage.getItem("haven_token");
   if (!token) throw new Error("Not authenticated");
   const res = await havenApi.post(
     "/bookings",
-    { propertyId, visitDate: date },
+    { propertyId, visitDate, mobile, homeAddress, timeSlot, notes, fullName },
     { headers: { Authorization: `Bearer ${token}` } }
   );
   return res.data;
@@ -75,10 +75,14 @@ export const cancelBooking = async (bookingId) => {
 };
 
 /** GET /api/bookings — ALL bookings (admin) */
-export const getAllBookingsAdmin = async (status = "", page = 1) => {
+export const getAllBookingsAdmin = async (status = "", page = 1, search = "", dateFrom = "", dateTo = "", property = "") => {
   const token = localStorage.getItem("haven_token");
   const params = new URLSearchParams();
   if (status) params.set("status", status);
+  if (search) params.set("search", search);
+  if (dateFrom) params.set("dateFrom", dateFrom);
+  if (dateTo) params.set("dateTo", dateTo);
+  if (property) params.set("property", property);
   params.set("page", page);
   const res = await havenApi.get(`/bookings?${params}`, {
     headers: { Authorization: `Bearer ${token}` },

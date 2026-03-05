@@ -9,7 +9,7 @@ export const STATIC_PROPERTIES = [
         featured: true,
         type: "penthouse",
         category: "luxury",
-        price: { amount: 18500000, currency: "USD", priceType: "for-sale" },
+        price: { amount: 18500000, currency: "INR", priceType: "for-sale" },
         location: {
             address: "One57, 157 West 57th Street, Unit PH-A",
             city: "New York",
@@ -52,7 +52,7 @@ export const STATIC_PROPERTIES = [
         featured: true,
         type: "villa",
         category: "luxury",
-        price: { amount: 24800000, currency: "USD", priceType: "for-sale" },
+        price: { amount: 24800000, currency: "INR", priceType: "for-sale" },
         location: {
             address: "3 Millionaire's Row, Malibu",
             city: "Los Angeles",
@@ -95,7 +95,7 @@ export const STATIC_PROPERTIES = [
         featured: true,
         type: "loft",
         category: "urban",
-        price: { amount: 5250000, currency: "USD", priceType: "for-sale" },
+        price: { amount: 5250000, currency: "INR", priceType: "for-sale" },
         location: {
             address: "136 Wooster Street, Loft 4E",
             city: "New York",
@@ -136,7 +136,7 @@ export const STATIC_PROPERTIES = [
         featured: true,
         type: "mansion",
         category: "luxury",
-        price: { amount: 42000000, currency: "USD", priceType: "for-sale" },
+        price: { amount: 42000000, currency: "INR", priceType: "for-sale" },
         location: {
             address: "1200 Stone Canyon Road",
             city: "Los Angeles",
@@ -179,7 +179,7 @@ export const STATIC_PROPERTIES = [
         featured: false,
         type: "townhouse",
         category: "residential",
-        price: { amount: 7800000, currency: "USD", priceType: "for-sale" },
+        price: { amount: 7800000, currency: "INR", priceType: "for-sale" },
         location: { address: "421 West 24th Street", city: "New York", state: "NY", country: "US", zipCode: "10011", neighborhood: "Chelsea" },
         details: { bedrooms: 5, bathrooms: 4, halfBaths: 1, squareFeet: 5100, lotSize: 3400, floors: 4, yearBuilt: 1895, parking: 0, pool: false, furnished: false },
         description: {
@@ -209,7 +209,7 @@ export const STATIC_PROPERTIES = [
         featured: false,
         type: "estate",
         category: "luxury",
-        price: { amount: 14200000, currency: "USD", priceType: "for-sale" },
+        price: { amount: 14200000, currency: "INR", priceType: "for-sale" },
         location: { address: "2960 Broadway Street", city: "San Francisco", state: "CA", country: "US", zipCode: "94115", neighborhood: "Pacific Heights" },
         details: { bedrooms: 7, bathrooms: 7, halfBaths: 1, squareFeet: 8900, lotSize: 9600, floors: 4, yearBuilt: 1908, parking: 3, garage: true, pool: false, furnished: false },
         description: {
@@ -239,7 +239,7 @@ export const STATIC_PROPERTIES = [
         featured: false,
         type: "apartment",
         category: "urban",
-        price: { amount: 32000, currency: "USD", priceType: "for-rent" },
+        price: { amount: 32000, currency: "INR", priceType: "for-rent" },
         location: { address: "55 Hudson Yards, Apartment 48A", city: "New York", state: "NY", country: "US", zipCode: "10001", neighborhood: "Hudson Yards" },
         details: { bedrooms: 3, bathrooms: 3, halfBaths: 1, squareFeet: 2950, yearBuilt: 2022, parking: 1, garage: true, pool: true, furnished: true },
         description: {
@@ -269,7 +269,7 @@ export const STATIC_PROPERTIES = [
         featured: false,
         type: "chalet",
         category: "resort",
-        price: { amount: 16500000, currency: "USD", priceType: "for-sale" },
+        price: { amount: 16500000, currency: "INR", priceType: "for-sale" },
         location: { address: "700 Roaring Fork Road", city: "Aspen", state: "CO", country: "US", zipCode: "81611", neighborhood: "Roaring Fork" },
         details: { bedrooms: 6, bathrooms: 7, halfBaths: 1, squareFeet: 8200, lotSize: 43560, floors: 3, yearBuilt: 2018, parking: 4, garage: true, pool: true, furnished: true },
         description: {
@@ -299,7 +299,7 @@ export const STATIC_PROPERTIES = [
         featured: false,
         type: "villa",
         category: "tropical",
-        price: { amount: 8900000, currency: "USD", priceType: "for-sale" },
+        price: { amount: 8900000, currency: "INR", priceType: "for-sale" },
         location: { address: "3411 Main Highway", city: "Miami", state: "FL", country: "US", zipCode: "33133", neighborhood: "Coconut Grove" },
         details: { bedrooms: 5, bathrooms: 6, halfBaths: 1, squareFeet: 6400, lotSize: 22000, floors: 2, yearBuilt: 2020, parking: 4, garage: true, pool: true, furnished: true },
         description: {
