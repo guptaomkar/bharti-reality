@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import { propertyRoute } from "./routes/properties.js";
 import { authRoute } from "./routes/auth.js";
 import { bookingRoute } from "./routes/bookings.js";
+import { adminRoute } from "./routes/admin.js";
 
 
 // ─── Legacy routes (Prisma-based, kept for backward compat) ──────────────────
@@ -29,9 +30,9 @@ app.use(cors({
     "http://localhost:5174",
     "http://localhost:3000",
     "https://bharti-reality.onrender.com",
-    "https://bharti-reality-git-main.onrender.com", // Just in case they use preview deployments
-    process.env.CLIENT_URL // Allow dynamic environment variable
-  ].filter(Boolean), // Removes undefined/null if CLIENT_URL is not set
+    "https://bharti-reality-git-main.onrender.com",
+    process.env.CLIENT_URL
+  ].filter(Boolean),
   credentials: true,
 }));
 
@@ -123,6 +124,7 @@ async function seedUsers(User) {
 app.use("/api/auth", authRoute);
 app.use("/api/properties", propertyRoute);
 app.use("/api/bookings", bookingRoute);
+app.use("/api/admin", adminRoute);
 
 
 // ─── Health check ─────────────────────────────────────────────────────────────

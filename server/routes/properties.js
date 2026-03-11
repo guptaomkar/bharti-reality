@@ -3,6 +3,7 @@ import asyncHandler from "express-async-handler";
 import mongoose from "mongoose";
 import Property from "../models/Property.js";
 import { uploadFields, handleUploadError } from "../middleware/upload.js";
+import { requireAuth, requireAdmin } from "./auth.js";
 import { STATIC_PROPERTIES } from "../data/propertiesSeed.js";
 
 const router = express.Router();
@@ -146,22 +147,81 @@ router.post("/", uploadFields, handleUploadError, asyncHandler(async (req, res) 
 }));
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  PUT /api/properties/:id — partial update
+//  PUT /api/properties/:id — full update with file handling (admin only)
 // ─────────────────────────────────────────────────────────────────────────────
-router.put("/:id", uploadFields, handleUploadError, asyncHandler(async (req, res) => {
+router.put("/:id", requireAuth, requireAdmin, uploadFields, handleUploadError, asyncHandler(async (req, res) => {
+    const body = req.body;
+    const files = req.files || {};
+
+    const updateData = {};
+
+    // Scalar fields
+    if (body.title !== undefined) updateData.title = body.title;
+    if (body.status !== undefined) updateData.status = body.status;
+    if (body.featured !== undefined) updateData.featured = body.featured === "true";
+    if (body.type !== undefined) updateData.type = body.type;
+    if (body.category !== undefined) updateData.category = body.category;
+    if (body.virtualTourUrl !== undefined) updateData.virtualTourUrl = body.virtualTourUrl;
+
+    // Nested JSON fields
+    if (body.price) updateData.price = parseJsonField(body.price);
+    if (body.location) updateData.location = parseJsonField(body.location);
+    if (body.details) updateData.details = parseJsonField(body.details);
+    if (body.description) updateData.description = parseJsonField(body.description);
+    if (body.amenities) updateData.amenities = parseJsonField(body.amenities);
+    if (body.agent) updateData.agent = parseJsonField(body.agent);
+
+    // Media handling
+    const existingProp = await Property.findById(req.params.id);
+    if (!existingProp) return res.status(404).json({ message: "Property not found" });
+
+    const media = existingProp.media?.toObject?.() || existingProp.media || {};
+
+    if (files.coverImage?.[0]) {
+        media.coverImage = `${req.protocol}://${req.get("host")}/uploads/photos/${files.coverImage[0].filename}`;
+    } else if (body.coverImageUrl) {
+        media.coverImage = body.coverImageUrl;
+    }
+
+    if (files.photos?.length) {
+        media.photos = [
+            ...(media.photos || []),
+            ...files.photos.map(f => `${req.protocol}://${req.get("host")}/uploads/photos/${f.filename}`),
+        ];
+    }
+
+    if (files.videos?.length) {
+        media.videos = [
+            ...(media.videos || []),
+            ...files.videos.map(f => `${req.protocol}://${req.get("host")}/uploads/videos/${f.filename}`),
+        ];
+    }
+
+    if (files.floorPlans?.length) {
+        media.floorPlans = [
+            ...(media.floorPlans || []),
+            ...files.floorPlans.map(f => `${req.protocol}://${req.get("host")}/uploads/floorplans/${f.filename}`),
+        ];
+    }
+
+    if (body.heroMediaType !== undefined) media.heroMediaType = body.heroMediaType;
+    if (body.heroMediaUrl !== undefined) media.heroMediaUrl = body.heroMediaUrl;
+
+    updateData.media = media;
+
     const updated = await Property.findByIdAndUpdate(
         req.params.id,
-        { $set: req.body },
+        { $set: updateData },
         { new: true, runValidators: true }
     );
-    if (!updated) return res.status(404).json({ message: "Property not found" });
+
     res.json(updated);
 }));
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  DELETE /api/properties/:id
+//  DELETE /api/properties/:id (admin only)
 // ─────────────────────────────────────────────────────────────────────────────
-router.delete("/:id", asyncHandler(async (req, res) => {
+router.delete("/:id", requireAuth, requireAdmin, asyncHandler(async (req, res) => {
     const deleted = await Property.findByIdAndDelete(req.params.id);
     if (!deleted) return res.status(404).json({ message: "Property not found" });
     res.json({ message: "Property deleted" });

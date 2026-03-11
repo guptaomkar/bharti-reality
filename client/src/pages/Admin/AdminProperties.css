@@ -1,0 +1,363 @@
+/* ── AdminProperties.css — HAVEN dark-obsidian + gold ────────────────────────── */
+
+.ap-page {
+    min-height: 80vh;
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+}
+
+.ap-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────────── */
+.ap-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.ap-title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin-top: 0.25rem;
+}
+
+.ap-add-btn {
+    background: linear-gradient(135deg, #C9A96E 0%, #a8893c 100%);
+    color: #080808;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    padding: 0.65rem 1.4rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.18s, box-shadow 0.18s;
+}
+.ap-add-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(201, 169, 110, 0.35);
+}
+
+/* ── Filters ───────────────────────────────────────────────────────────────── */
+.ap-filters {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.ap-filter-input {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(201, 169, 110, 0.18);
+    color: #e8e4dc;
+    padding: 0.55rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    min-width: 160px;
+    transition: border-color 0.2s;
+}
+.ap-filter-input:focus {
+    outline: none;
+    border-color: rgba(201, 169, 110, 0.55);
+}
+.ap-filter-input::placeholder {
+    color: rgba(232, 228, 220, 0.35);
+}
+
+.ap-filter-select {
+    min-width: 140px;
+    cursor: pointer;
+}
+.ap-filter-select option {
+    background: #1a1a1a;
+    color: #e8e4dc;
+}
+
+.ap-clear-btn {
+    background: none;
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    color: #f87171;
+    font-size: 0.78rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.ap-clear-btn:hover {
+    background: rgba(248, 113, 113, 0.1);
+}
+
+.ap-total {
+    margin-left: auto;
+    color: rgba(232, 228, 220, 0.45);
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+}
+
+/* ── Table ──────────────────────────────────────────────────────────────────── */
+.ap-table-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid rgba(201, 169, 110, 0.12);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
+}
+
+.ap-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.ap-table thead th {
+    text-align: left;
+    padding: 0.85rem 1rem;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(201, 169, 110, 0.7);
+    background: rgba(201, 169, 110, 0.05);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.12);
+    white-space: nowrap;
+}
+
+.ap-row {
+    transition: background 0.15s;
+}
+.ap-row:hover {
+    background: rgba(201, 169, 110, 0.04);
+}
+.ap-row td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    vertical-align: middle;
+    color: #e8e4dc;
+}
+
+/* Property cell with thumbnail */
+.ap-prop-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ap-prop-thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid rgba(201, 169, 110, 0.15);
+    flex-shrink: 0;
+}
+
+.ap-prop-title {
+    font-weight: 500;
+    color: #e8e4dc;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ap-td-type {
+    text-transform: capitalize;
+    color: rgba(232, 228, 220, 0.6);
+}
+
+.ap-td-city {
+    color: rgba(232, 228, 220, 0.7);
+}
+
+.ap-td-price {
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-size: 0.82rem;
+    color: #C9A96E;
+}
+
+.ap-td-date {
+    color: rgba(232, 228, 220, 0.45);
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+/* Status badge */
+.ap-status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+/* Action buttons */
+.ap-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.ap-action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid rgba(201, 169, 110, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+    color: #e8e4dc;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s;
+}
+.ap-action-edit:hover {
+    background: rgba(201, 169, 110, 0.12);
+    border-color: rgba(201, 169, 110, 0.4);
+    color: #C9A96E;
+}
+.ap-action-delete:hover {
+    background: rgba(248, 113, 113, 0.12);
+    border-color: rgba(248, 113, 113, 0.4);
+    color: #f87171;
+}
+
+/* ── Empty / Error ──────────────────────────────────────────────────────────── */
+.ap-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: rgba(232, 228, 220, 0.4);
+    font-size: 0.95rem;
+}
+.ap-error {
+    text-align: center;
+    color: #f87171;
+    padding: 2rem;
+}
+
+/* ── Pagination ─────────────────────────────────────────────────────────────── */
+.ap-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+.ap-page-btn {
+    background: rgba(201, 169, 110, 0.08);
+    border: 1px solid rgba(201, 169, 110, 0.2);
+    color: #C9A96E;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    transition: background 0.2s;
+}
+.ap-page-btn:hover:not(:disabled) {
+    background: rgba(201, 169, 110, 0.16);
+}
+.ap-page-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.ap-page-info {
+    color: rgba(232, 228, 220, 0.5);
+    font-size: 0.82rem;
+}
+
+/* ── Delete Modal ───────────────────────────────────────────────────────────── */
+.ap-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.ap-modal {
+    background: #141414;
+    border: 1px solid rgba(201, 169, 110, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 420px;
+    width: 90%;
+}
+
+.ap-modal-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.3rem;
+    color: #e8e4dc;
+    margin-bottom: 0.75rem;
+}
+
+.ap-modal-text {
+    color: rgba(232, 228, 220, 0.6);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+.ap-modal-text strong {
+    color: #C9A96E;
+}
+
+.ap-modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.ap-modal-btn {
+    padding: 0.55rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s;
+    border: none;
+}
+.ap-modal-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.ap-modal-cancel {
+    background: rgba(255, 255, 255, 0.06);
+    color: #e8e4dc;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.ap-modal-cancel:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.ap-modal-delete {
+    background: rgba(248, 113, 113, 0.2);
+    color: #f87171;
+}
+.ap-modal-delete:hover:not(:disabled) {
+    background: rgba(248, 113, 113, 0.3);
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .ap-prop-thumb { display: none; }
+    .ap-prop-title { max-width: 140px; }
+    .ap-td-type, .ap-td-date { display: none; }
+    .ap-table { font-size: 0.8rem; }
+    .ap-table thead th { padding: 0.65rem 0.6rem; }
+    .ap-row td { padding: 0.6rem; }
+}

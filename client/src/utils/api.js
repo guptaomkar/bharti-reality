@@ -2,14 +2,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
 
-// Legacy Prisma/external API
-export const api = axios.create({
-  baseURL:
-    import.meta.env.VITE_API_URL ||
-    "https://full-stack-real-estate-youtube.vercel.app/api",
-});
-
-// ─── New HAVEN Mongoose backend (port 5000) ────────────────────────────────
+// ─── HAVEN Mongoose backend ────────────────────────────────────────────────
 export const havenApi = axios.create({
   baseURL: import.meta.env.VITE_HAVEN_API_URL || "http://localhost:5000/api",
   timeout: 8000,
@@ -136,4 +129,64 @@ export const getAllFav = async (email, token) => {
     toast.error("Something went wrong while fetching favs");
     throw error;
   }
+};
+
+// ─── Admin: Property Management ──────────────────────────────────────────────
+
+/** GET /api/properties — admin property list (paginated) */
+export const getAllPropertiesAdmin = async (page = 1, search = "", status = "") => {
+  const token = localStorage.getItem("haven_token");
+  const params = new URLSearchParams();
+  params.set("page", page);
+  params.set("limit", 12);
+  if (search) params.set("city", search);
+  if (status) params.set("status", status);
+  const res = await havenApi.get(`/properties?${params}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
+
+/** PUT /api/properties/:id — update property (FormData) */
+export const updateProperty = async (id, formData) => {
+  const token = localStorage.getItem("haven_token");
+  const res = await havenApi.put(`/properties/${id}`, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.data;
+};
+
+/** DELETE /api/properties/:id */
+export const deleteProperty = async (id) => {
+  const token = localStorage.getItem("haven_token");
+  const res = await havenApi.delete(`/properties/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
+
+// ─── Admin: User Management ──────────────────────────────────────────────────
+
+/** GET /api/admin/users — all users (admin) */
+export const getAllUsersAdmin = async (page = 1, search = "") => {
+  const token = localStorage.getItem("haven_token");
+  const params = new URLSearchParams();
+  params.set("page", page);
+  if (search) params.set("search", search);
+  const res = await havenApi.get(`/admin/users?${params}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
+
+/** GET /api/admin/users/:id/wishlist — user wishlist (admin) */
+export const getUserWishlist = async (userId) => {
+  const token = localStorage.getItem("haven_token");
+  const res = await havenApi.get(`/admin/users/${userId}/wishlist`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
 };

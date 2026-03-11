@@ -13,6 +13,9 @@ import Bookings from "./pages/Bookings/Bookings";
 import Favourites from "./pages/Favourites/Favourites";
 import NewProperty from "./pages/Admin/NewProperty";
 import AdminBookings from "./pages/Admin/AdminBookings";
+import AdminProperties from "./pages/Admin/AdminProperties";
+import EditProperty from "./pages/Admin/EditProperty";
+import AdminUsers from "./pages/Admin/AdminUsers";
 import { useLocation } from "react-router-dom";
 
 /* ─── Scroll Restoration ─────────────────────────────────────────────────── */
@@ -87,6 +90,9 @@ function App() {
                 <Route path="/favourites" element={<Favourites />} />
                 <Route path="/admin/new-property" element={<NewProperty />} />
                 <Route path="/admin/bookings" element={<AdminBookings />} />
+                <Route path="/admin/properties" element={<AdminProperties />} />
+                <Route path="/admin/edit-property/:id" element={<EditProperty />} />
+                <Route path="/admin/users" element={<AdminUsers />} />
               </Route>
             </Routes>
           </Suspense>

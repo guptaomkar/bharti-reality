@@ -43,9 +43,17 @@ const Header = () => {
 
               {/* Admin-only Panel */}
               {isAdmin && (
-                <NavLink to="/admin/new-property" className="h-nav-link">
-                  Add Property
-                </NavLink>
+                <>
+                  <NavLink to="/admin/properties" className="h-nav-link">
+                    Manage Properties
+                  </NavLink>
+                  <NavLink to="/admin/new-property" className="h-nav-link">
+                    Add Property
+                  </NavLink>
+                  <NavLink to="/admin/users" className="h-nav-link">
+                    Users
+                  </NavLink>
+                </>
               )}
 
               {!isAuthenticated ? (
