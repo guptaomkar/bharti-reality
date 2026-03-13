@@ -177,7 +177,8 @@ const AdminUsers = () => {
                                                             <div className="au-wishlist-grid">
                                                                 {wishlistData[u._id].map((p) => (
                                                                     <div key={p._id} className="au-wishlist-card">
-                                                                        <img
+                                                                        <Link to={`/properties/${p._id}`} style={{ display: 'contents' }}>
+                                                                            <img
                                                                             className="au-wishlist-thumb"
                                                                             src={p.media?.coverImage || p.image || "https://placehold.co/80x60/1a1a1a/C9A96E?text=N/A"}
                                                                             alt={p.title}
@@ -202,6 +203,7 @@ const AdminUsers = () => {
                                                                         >
                                                                             {p.status}
                                                                         </span>
+                                                                        </Link>
                                                                     </div>
                                                                 ))}
                                                             </div>

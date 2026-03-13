@@ -108,7 +108,6 @@
 }
 
 /* ── Main Grid ───────────────────────────────────────────────────────────── */
-.props-section {}
 
 .props-grid {
     display: grid;
@@ -123,11 +122,28 @@
 
     .props-filter-selects {
         flex-direction: column;
+        align-items: stretch;
     }
 
     .props-filter-select,
     .props-filter-input {
         width: 100%;
         min-width: unset;
+    }
+    
+    .props-header {
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .props-grid, .props-featured-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .props-filter-bar {
+        padding: 1.2rem;
     }
 }

@@ -64,7 +64,7 @@ const Favourites = () => {
   );
 
   return (
-    <div className="wrapper">
+    <div className="fav-page wrapper">
       <div className="flexColCenter paddings innerWidth properties-container">
         <div className="fav-header">
           <span className="haven-label">Personal Collection</span>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useAuth } from "../../context/AuthContext";
 import { getMyBookings, cancelBooking } from "../../utils/api";
 import { toast } from "react-toastify";
 import { PuffLoader } from "react-spinners";
@@ -25,6 +26,7 @@ const STATUS_LABELS = {
 const Bookings = () => {
   const [filter, setFilter] = useState("");
   const queryClient = useQueryClient();
+  const { user, token, loading: authLoading } = useAuth();
 
   const { data: bookings, isLoading, isError } = useQuery(
     "myBookingsDetails",
@@ -50,6 +52,27 @@ const Bookings = () => {
     return (
       <div className="wrapper flexCenter" style={{ height: "60vh" }}>
         <span className="secondaryText">Error while fetching your bookings</span>
+      </div>
+    );
+  }
+
+  if (authLoading) {
+    return (
+      <div className="wrapper flexCenter" style={{ height: "60vh" }}>
+        <PuffLoader color="var(--gold)" />
+      </div>
+    );
+  }
+
+  if (!token || !user) {
+    return (
+      <div className="wrapper admin-bookings-page flexCenter">
+        <div style={{ textAlign: "center", padding: "4rem 2rem", display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
+          <IoTime style={{ fontSize: "3.5rem", opacity: 0.4 }} />
+          <h2 className="haven-heading" style={{ margin: 0 }}>Your Viewings</h2>
+          <p className="secondaryText" style={{ maxWidth: "340px" }}>Sign in to view and manage your property visits.</p>
+          <Link to="/" className="button" style={{ marginTop: "0.5rem" }}>Sign In</Link>
+        </div>
       </div>
     );
   }

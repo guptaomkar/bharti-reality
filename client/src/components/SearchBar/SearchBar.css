@@ -44,3 +44,36 @@
 .haven-search-btn:hover {
     opacity: 0.85;
 }
+
+@media (max-width: 640px) {
+  .haven-search-bar {
+    width: 100%;
+    padding: 6px 8px 6px 14px;
+  }
+  
+  .haven-search-input {
+    font-size: 11px;
+  }
+  
+  .haven-search-btn {
+    padding: 8px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .haven-search-bar {
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .haven-search-input {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  
+  .haven-search-btn {
+    width: 100%;
+  }
+}

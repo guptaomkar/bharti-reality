@@ -16,6 +16,7 @@ import AdminBookings from "./pages/Admin/AdminBookings";
 import AdminProperties from "./pages/Admin/AdminProperties";
 import EditProperty from "./pages/Admin/EditProperty";
 import AdminUsers from "./pages/Admin/AdminUsers";
+import AdminHeroCards from "./pages/Admin/AdminHeroCards";
 import { useLocation } from "react-router-dom";
 
 /* ─── Scroll Restoration ─────────────────────────────────────────────────── */
@@ -93,6 +94,7 @@ function App() {
                 <Route path="/admin/properties" element={<AdminProperties />} />
                 <Route path="/admin/edit-property/:id" element={<EditProperty />} />
                 <Route path="/admin/users" element={<AdminUsers />} />
+                <Route path="/admin/hero-cards" element={<AdminHeroCards />} />
               </Route>
             </Routes>
           </Suspense>

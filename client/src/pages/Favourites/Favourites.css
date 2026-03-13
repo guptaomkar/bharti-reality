@@ -2,6 +2,7 @@
 
 .fav-page {
     min-height: 60vh;
+    padding-top: 8.5rem;
 }
 
 .fav-header {
@@ -64,4 +65,22 @@
     font-weight: 500;
     color: var(--cream);
     margin: 0;
+}
+
+@media (max-width: 640px) {
+    .fav-header {
+        padding-top: 0;
+    }
+
+    .fav-main-title, .fav-title {
+        font-size: 2.2rem;
+    }
+
+    .fav-login-prompt {
+        padding: 2rem 1rem;
+    }
+
+    .fav-empty {
+        padding: 3rem 1rem;
+    }
 }

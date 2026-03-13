@@ -64,7 +64,7 @@ const PropertyCard = ({ card, index = 0 }) => {
       {/* Image area */}
       <div className="r-card-img-wrap">
         <img
-          src={card.image || card.media?.coverImage}
+          src={card.listingImage || card.image || card.media?.coverImage}
           alt={card.title}
           className="r-card-img"
           loading="lazy"

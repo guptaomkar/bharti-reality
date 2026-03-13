@@ -8,10 +8,12 @@
   /* Faster transition when removing the background */
   transition: background 0.15s ease, backdrop-filter 0.15s ease;
   background: transparent;
+  pointer-events: none;
 }
 
 .h-wrapper--scrolled {
   background: rgba(8, 8, 8, 0.82);
+  pointer-events: auto;
   backdrop-filter: blur(18px) saturate(1.4);
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
   border-bottom: 1px solid var(--glass-br);
@@ -26,6 +28,7 @@
   justify-content: space-between;
   padding-top: 22px;
   padding-bottom: 22px;
+  pointer-events: auto;
 }
 
 
@@ -127,14 +130,46 @@
   border-color: var(--gold);
 }
 
+/* ─── MOBILE LOGOUT BUTTON ────────────────────────────────────────────────── */
+.h-desktop-profile {
+  display: block;
+}
+
+.h-logout-btn-mobile {
+  display: none;
+}
+
 /* ─── HAMBURGER (mobile) ──────────────────────────────────────────────────── */
 .h-menu-icon {
   display: none;
   cursor: none;
+  pointer-events: auto; /* Re-enable pointer events for mobile hamburger */
 }
 
 /* ─── RESPONSIVE ──────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
+  .h-logout-btn-mobile {
+    display: block;
+    font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(248, 113, 113, 0.8);
+    background: transparent;
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    padding: 12px 20px;
+    cursor: none;
+    transition: all 0.3s;
+    margin-top: auto; /* Push to bottom if flex column has space */
+    width: 100%;
+  }
+
+  .h-logout-btn-mobile:hover {
+    background: rgba(248, 113, 113, 0.1);
+    color: #f87171;
+    border-color: rgba(248, 113, 113, 0.5);
+  }
+
   .h-menu-icon {
     display: block;
   }
@@ -158,5 +193,6 @@
 
   .h-menu.h-menu--open {
     right: 0;
+    pointer-events: auto; /* Ensure menu content is clickable even when un-scrolled */
   }
 }

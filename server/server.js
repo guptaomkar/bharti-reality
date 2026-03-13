@@ -8,6 +8,7 @@ import { propertyRoute } from "./routes/properties.js";
 import { authRoute } from "./routes/auth.js";
 import { bookingRoute } from "./routes/bookings.js";
 import { adminRoute } from "./routes/admin.js";
+import { heroCardsRoute } from "./routes/heroCards.js";
 
 
 // ─── Legacy routes (Prisma-based, kept for backward compat) ──────────────────
@@ -125,6 +126,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/properties", propertyRoute);
 app.use("/api/bookings", bookingRoute);
 app.use("/api/admin", adminRoute);
+app.use("/api/hero-cards", heroCardsRoute);
 
 
 // ─── Health check ─────────────────────────────────────────────────────────────

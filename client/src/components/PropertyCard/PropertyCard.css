@@ -190,3 +190,37 @@
   opacity: 0.7;
   font-size: 11px;
 }
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .r-card-img-wrap {
+    height: 180px;
+  }
+  
+  .r-card-body {
+    padding: 12px 14px 16px;
+    gap: 5px;
+  }
+  
+  .r-card-price {
+    font-size: 20px;
+  }
+  
+  .r-card-badges {
+    top: 8px;
+    left: 8px;
+  }
+  
+  .r-card-type-badge,
+  .r-card-status-badge {
+    font-size: 7.5px;
+    padding: 3px 8px;
+  }
+  
+  .r-card-heart {
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+  }
+}

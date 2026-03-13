@@ -187,3 +187,22 @@
 .ab-card-actions .button {
     width: 100%;
 }
+
+@media (max-width: 640px) {
+    .admin-bookings-page {
+        padding-top: 80px;
+    }
+
+    .ab-filters {
+        gap: 0.5rem;
+    }
+
+    .ab-filter-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+    }
+
+    .ab-grid {
+        grid-template-columns: 1fr;
+    }
+}

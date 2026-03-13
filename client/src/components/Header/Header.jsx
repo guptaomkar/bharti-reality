@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./Header.css";
 import { BiMenuAltRight } from "react-icons/bi";
-import { getMenuStyles } from "../../utils/common";
 import useHeaderColor from "../../hooks/useHeaderColor";
 import OutsideClickHandler from "react-outside-click-handler";
 import { Link, NavLink } from "react-router-dom";
@@ -30,13 +29,13 @@ const Header = () => {
 
           {/* Desktop Menu */}
           <OutsideClickHandler onOutsideClick={() => setMenuOpened(false)}>
-            <nav className="h-menu" style={getMenuStyles(menuOpened)}>
+            <nav className={`h-menu ${menuOpened ? "h-menu--open" : ""}`}>
 
-              <NavLink to="/properties" className="h-nav-link">Properties</NavLink>
+              <NavLink to="/properties" className="h-nav-link" onClick={() => setMenuOpened(false)}>Properties</NavLink>
 
               {/* Authenticated Links */}
               {isAuthenticated && (
-                <NavLink to={isAdmin ? "/admin/bookings" : "/bookings"} className="h-nav-link">
+                <NavLink to={isAdmin ? "/admin/bookings" : "/bookings"} className="h-nav-link" onClick={() => setMenuOpened(false)}>
                   Bookings
                 </NavLink>
               )}
@@ -44,24 +43,31 @@ const Header = () => {
               {/* Admin-only Panel */}
               {isAdmin && (
                 <>
-                  <NavLink to="/admin/properties" className="h-nav-link">
+                  <NavLink to="/admin/properties" className="h-nav-link" onClick={() => setMenuOpened(false)}>
                     Manage Properties
                   </NavLink>
-                  <NavLink to="/admin/new-property" className="h-nav-link">
+                  <NavLink to="/admin/new-property" className="h-nav-link" onClick={() => setMenuOpened(false)}>
                     Add Property
                   </NavLink>
-                  <NavLink to="/admin/users" className="h-nav-link">
+                  <NavLink to="/admin/users" className="h-nav-link" onClick={() => setMenuOpened(false)}>
                     Users
                   </NavLink>
                 </>
               )}
 
               {!isAuthenticated ? (
-                <button className="h-login-btn" onClick={() => setAuthOpen(true)}>
+                <button className="h-login-btn" onClick={() => { setAuthOpen(true); setMenuOpened(false); }}>
                   Login
                 </button>
               ) : (
-                <ProfileMenu user={user} logout={logout} />
+                <>
+                  <div className="h-desktop-profile" onClick={() => setMenuOpened(false)}>
+                    <ProfileMenu user={user} logout={logout} />
+                  </div>
+                  <button className="h-logout-btn-mobile" onClick={() => { logout(); setMenuOpened(false); }}>
+                    Sign Out
+                  </button>
+                </>
               )}
             </nav>
           </OutsideClickHandler>

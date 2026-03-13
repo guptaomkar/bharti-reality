@@ -190,3 +190,65 @@ export const getUserWishlist = async (userId) => {
   });
   return res.data;
 };
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HERO CARDS (BUBBLES)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const getHeroCards = async () => {
+  try {
+    const res = await havenApi.get("/hero-cards");
+    return res.data;
+  } catch (err) {
+    if (axios.isAxiosError(err)) throw err;
+    throw new Error("Something went wrong while fetching hero cards");
+  }
+};
+
+export const getAdminHeroCards = async (token) => {
+  try {
+    const res = await havenApi.get("/admin/hero-cards", {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return res.data;
+  } catch (err) {
+    if (axios.isAxiosError(err)) throw err;
+    throw new Error("Something went wrong while fetching admin hero cards");
+  }
+};
+
+export const createHeroCard = async (data, token) => {
+  try {
+    const res = await havenApi.post("/admin/hero-cards", data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return res.data;
+  } catch (err) {
+    if (axios.isAxiosError(err)) throw err;
+    throw new Error("Something went wrong while creating hero card");
+  }
+};
+
+export const updateHeroCard = async (id, data, token) => {
+  try {
+    const res = await havenApi.put(`/admin/hero-cards/${id}`, data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return res.data;
+  } catch (err) {
+    if (axios.isAxiosError(err)) throw err;
+    throw new Error("Something went wrong while updating hero card");
+  }
+};
+
+export const deleteHeroCard = async (id, token) => {
+  try {
+    const res = await havenApi.delete(`/admin/hero-cards/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return res.data;
+  } catch (err) {
+    if (axios.isAxiosError(err)) throw err;
+    throw new Error("Something went wrong while deleting hero card");
+  }
+};

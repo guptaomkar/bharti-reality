@@ -2,6 +2,7 @@ import express from "express";
 import asyncHandler from "express-async-handler";
 import User from "../models/User.js";
 import Property from "../models/Property.js";
+import { HeroCard } from "../models/HeroCard.js";
 import { requireAuth, requireAdmin } from "./auth.js";
 
 const router = express.Router();
@@ -80,5 +81,35 @@ router.get(
         });
     })
 );
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Hero Cards (Bubbles) CRUD
+// ─────────────────────────────────────────────────────────────────────────────
+
+// GET all hero cards (admin sees active and inactive)
+router.get("/hero-cards", asyncHandler(async (req, res) => {
+    const cards = await HeroCard.find().sort({ order: 1, createdAt: -1 });
+    res.json(cards);
+}));
+
+// POST create hero card
+router.post("/hero-cards", asyncHandler(async (req, res) => {
+    const card = await HeroCard.create(req.body);
+    res.status(201).json(card);
+}));
+
+// PUT update hero card
+router.put("/hero-cards/:id", asyncHandler(async (req, res) => {
+    const card = await HeroCard.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!card) return res.status(404).json({ message: "Hero card not found" });
+    res.json(card);
+}));
+
+// DELETE hero card
+router.delete("/hero-cards/:id", asyncHandler(async (req, res) => {
+    const card = await HeroCard.findByIdAndDelete(req.params.id);
+    if (!card) return res.status(404).json({ message: "Hero card not found" });
+    res.json({ message: "Hero card deleted" });
+}));
 
 export { router as adminRoute };

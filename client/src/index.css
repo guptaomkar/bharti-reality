@@ -85,6 +85,19 @@ body:hover #haven-cursor-ring {
   opacity: 1;
 }
 
+/* Disable custom cursor on touch devices */
+@media (pointer: coarse) {
+  #haven-cursor-dot, #haven-cursor-ring {
+    display: none !important;
+  }
+  *, body, a, button, select, .button, .r-card, .h-nav-link, .h-login-btn, .props-filter-select, .props-filter-input, .props-clear-btn {
+    cursor: auto !important;
+  }
+  a, button, .button {
+    cursor: pointer !important;
+  }
+}
+
 /* ─── LAYOUT UTILITIES ────────────────────────────────────────────────────── */
 .wrapper {
   background-color: var(--obsidian);
@@ -317,5 +330,9 @@ select:focus {
 
   .orangeText {
     font-size: 0.65rem;
+  }
+  
+  .paddings {
+    padding: 1.2rem;
   }
 }

@@ -31,13 +31,20 @@ const useHavenProperties = (filters = {}) => {
     const usingFallback = isError || (!isLoading && (!rawList || rawList.length === 0));
 
     // Map API properties to the shape components expect
-    const normalised = (properties || STATIC_PROPERTIES).map((p) => ({
-        ...p,
-        id: p._id || p.id || p.slug,
-        image: p.media?.coverImage || p.image || p.media?.photos?.[0] || "",
-        city: p.location?.city || p.city || "",
-        country: p.location?.country || p.country || "",
-        address: p.location?.address || p.address || "",
+    const normalised = (properties || STATIC_PROPERTIES).map((p) => {
+        // Feature 2: Determine listing image. If hero is video/youtube, use a photo fallback instead.
+        const isVideoHero = p.media?.heroMediaType === "video" || p.media?.heroMediaType === "youtube";
+        const imageFallback = p.media?.coverImage || p.media?.photos?.[0] || p.image || "";
+        const defaultImage = p.media?.coverImage || p.image || p.media?.photos?.[0] || "";
+        
+        return {
+            ...p,
+            id: p._id || p.id || p.slug,
+            image: defaultImage,
+            listingImage: isVideoHero ? imageFallback : defaultImage,
+            city: p.location?.city || p.city || "",
+            country: p.location?.country || p.country || "",
+            address: p.location?.address || p.address || "",
         price: typeof p.price === "object" ? (p.price?.amount ?? p.price) : p.price,
         priceObj: typeof p.price === "object" ? p.price : { amount: p.price, currency: "INR", priceType: "for-sale" },
         facilities: {
@@ -55,7 +62,8 @@ const useHavenProperties = (filters = {}) => {
         agent: p.agent || {},
         shortDescription: p.description?.short || p.description || "",
         fullDescription: p.description?.full || p.description || "",
-    }));
+    };
+    });
 
     return {
         data: normalised,

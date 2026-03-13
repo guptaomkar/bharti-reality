@@ -57,7 +57,9 @@
     text-decoration: none;
     transition: color 0.3s;
     margin-bottom: auto;
-    padding-top: 6rem;
+    margin-top: 7.5rem;
+    position: relative;
+    z-index: 10;
 }
 
 .prop-back:hover {

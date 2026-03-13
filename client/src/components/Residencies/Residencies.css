@@ -134,6 +134,11 @@
 }
 
 @media (max-width: 600px) {
+  .r-wrapper {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
   .r-featured-grid {
     grid-template-columns: 1fr;
   }
@@ -144,5 +149,9 @@
 
   .r-featured-item--large .r-card-img-wrap {
     height: 220px;
+  }
+  
+  .r-carousel-section .swiper {
+    padding: 0.5rem 0 2rem 0;
   }
 }
