@@ -194,14 +194,8 @@ const AdminHeroCards = () => {
                 </div>
 
                 <div className="ah-form-group">
-                  <label>Property Type</label>
-                  <select value={formData.propertyType} onChange={e=>setFormData({...formData, propertyType: e.target.value})}>
-                    <option value="apartment">Apartment</option>
-                    <option value="villa">Villa</option>
-                    <option value="penthouse">Penthouse</option>
-                    <option value="mansion">Mansion</option>
-                    <option value="estate">Estate</option>
-                  </select>
+                  <label>Property Type / Description</label>
+                  <input required value={formData.propertyType} onChange={e=>setFormData({...formData, propertyType: e.target.value})} placeholder="e.g. Sea-View Penthouse" />
                 </div>
 
                 <div className="ah-form-row">

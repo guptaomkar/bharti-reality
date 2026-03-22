@@ -96,15 +96,15 @@ const Footer = () => {
           <div className="f-contact-list">
             <div className="f-contact-item">
               <svg className="f-contact-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></svg>
-              <span>Ekta Nagar, Kandivali West,<br />Mumbai, Maharashtra 400067</span>
+              <span>Vikhroli<br />Mumbai, Maharashtra 400067</span>
             </div>
             <div className="f-contact-item">
               <svg className="f-contact-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" /></svg>
-              <a href="tel:+919876543210" className="f-contact-link">+91 9702973178</a>
+              <a href="tel:+918108916177" className="f-contact-link">+91 8108916177</a>
             </div>
             <div className="f-contact-item">
               <svg className="f-contact-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
-              <a href="mailto:info@bhartirealty.com" className="f-contact-link">bhartimandal48@gmail.com</a>
+              <a href="mailto:korevyn.services@gmail.com" className="f-contact-link">korevyn.services@gmail.com</a>
             </div>
             <div className="f-contact-item">
               <svg className="f-contact-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10" /><polyline points="12,6 12,12 16,14" /></svg>
@@ -113,10 +113,10 @@ const Footer = () => {
           </div>
 
           {/* RERA Badge */}
-          {/* <div className="f-rera">
+          <div className="f-rera">
             <span className="f-rera-badge">RERA</span>
             <span className="f-rera-text">Registered Agent<br />MahaRERA No. P51800012345</span>
-          </div> */}
+          </div>
         </div>
 
       </div>
@@ -125,7 +125,7 @@ const Footer = () => {
       <div className="f-bottom">
         <div className="paddings innerWidth f-bottom-inner">
           <span className="f-copyright">
-            © {new Date().getFullYear()} Bharti Realty. All rights reserved.
+            © {new Date().getFullYear()} Korevyn Realty. All rights reserved.
           </span>
           <div className="f-bottom-links">
             <a href="#" className="f-bottom-link">Privacy Policy</a>

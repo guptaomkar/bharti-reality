@@ -26,7 +26,7 @@ const Contact = () => {
                   </div>
                   <div className="flexColStart detail">
                     <span className="primaryText">Call</span>
-                    <span className="secondaryText">+91 9702973178</span>
+                    <span className="secondaryText">+91 8108916177</span>
                   </div>
                 </div>
                 <div className="flexCenter button">Call now</div>
@@ -39,7 +39,7 @@ const Contact = () => {
                   </div>
                   <div className="flexColStart detail">
                     <span className="primaryText">Chat</span>
-                    <span className="secondaryText">+91 9702973178</span>
+                    <span className="secondaryText">+91 8108916177</span>
                   </div>
                 </div>
                 <div className="flexCenter button">Chat now</div>
@@ -55,7 +55,7 @@ const Contact = () => {
                   </div>
                   <div className="flexColStart detail">
                     <span className="primaryText">Instagram</span>
-                    <span className="secondaryText">@bhartirealty</span>
+                    <span className="secondaryText">korevyn.ai</span>
                   </div>
                 </div>
                 <div className="flexCenter button">Instagram now</div>
@@ -68,7 +68,7 @@ const Contact = () => {
                   </div>
                   <div className="flexColStart detail">
                     <span className="primaryText">Facebook</span>
-                    <span className="secondaryText">@bhartiproperty</span>
+                    <span className="secondaryText">korevyn.ai</span>
                   </div>
                 </div>
                 <div className="flexCenter button">Facebook now</div>

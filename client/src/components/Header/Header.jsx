@@ -52,6 +52,9 @@ const Header = () => {
                   <NavLink to="/admin/users" className="h-nav-link" onClick={() => setMenuOpened(false)}>
                     Users
                   </NavLink>
+                  <NavLink to="/admin/hero-cards" className="h-nav-link" onClick={() => setMenuOpened(false)}>
+                    Hero Bubbles
+                  </NavLink>
                 </>
               )}
 

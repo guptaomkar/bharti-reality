@@ -203,8 +203,8 @@
   backdrop-filter: blur(14px) saturate(1.4);
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
   border-radius: 2px;
-  padding: 16px 20px;
-  min-width: 190px;
+  padding: 18px 22px;
+  min-width: 200px;
   opacity: 0;
   animation: heroCardFloat var(--cdur, 9s) ease-in-out infinite var(--cdel, 0s);
 }
@@ -247,12 +247,12 @@
 .hgc-city {
   display: block;
   font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 8px;
+  font-size: 9px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--gold);
   opacity: 0.75;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .hgc-price {
@@ -260,7 +260,7 @@
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-weight: 300;
   font-size: 22px;
-  color: var(--cream);
+  color: #e8d5b0;
   line-height: 1;
   margin-bottom: 4px;
 }
@@ -268,9 +268,9 @@
 .hgc-type {
   display: block;
   font-family: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.36);
+  color: rgba(255, 255, 255, 0.38);
   text-transform: uppercase;
 }
 

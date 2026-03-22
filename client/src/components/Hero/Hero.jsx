@@ -176,42 +176,15 @@ const Hero = () => {
               style={{ left: c.position?.left || "10%", bottom: c.position?.bottom || "10%", "--cdur": `${c.animation?.duration || 10}s`, "--cdel": `${c.animation?.delay || 0}s` }}
             >
               <span className="hgc-city">{c.city}</span>
-              <span className="hgc-price">{c.price}</span>
+              {/* <span className="hgc-price">{c.price}</span> */}
+              <span className="hgc-price">₹{c.price}</span>
               <span className="hgc-type">{c.propertyType && c.propertyType.charAt(0).toUpperCase() + c.propertyType.slice(1)}</span>
             </div>
           ));
         }
 
-        // Fallback to static cards if no API cards exist or API fails
-        return (
-          <>
-            <div className="hero-glass-card" style={{ left: "72%", bottom: "22%", "--cdur": "10s", "--cdel": "0s" }}>
-              <span className="hgc-city">South Mumbai, MH</span>
-              <span className="hgc-price">₹ 18.5 Cr</span>
-              <span className="hgc-type">Sea-View Penthouse</span>
-            </div>
-            <div className="hero-glass-card" style={{ left: "7%", bottom: "32%", "--cdur": "12s", "--cdel": "2.5s" }}>
-              <span className="hgc-city">Pune, MH</span>
-              <span className="hgc-price">₹ 4.2 Cr</span>
-              <span className="hgc-type">Koregaon Park Villa</span>
-            </div>
-            <div className="hero-glass-card" style={{ left: "55%", bottom: "9%", "--cdur": "8.5s", "--cdel": "5s" }}>
-              <span className="hgc-city">Bandra West, MH</span>
-              <span className="hgc-price">₹ 12.8 Cr</span>
-              <span className="hgc-type">Seafacing Sky Loft</span>
-            </div>
-            <div className="hero-glass-card" style={{ left: "78%", bottom: "55%", "--cdur": "11s", "--cdel": "1.5s" }}>
-              <span className="hgc-city">Lonavala, MH</span>
-              <span className="hgc-price">₹ 6.9 Cr</span>
-              <span className="hgc-type">Hilltop Estate</span>
-            </div>
-            <div className="hero-glass-card" style={{ left: "18%", bottom: "13%", "--cdur": "9.5s", "--cdel": "3.8s" }}>
-              <span className="hgc-city">Nagpur, MH</span>
-              <span className="hgc-price">₹ 2.1 Cr</span>
-              <span className="hgc-type">Luxury Garden Residence</span>
-            </div>
-          </>
-        );
+        // Removed fallback static cards as they are now fully controlled by admin panel dynamically
+        return null;
       })()}
 
       {/* ── Stat Panel (top right) ───────────────────────────────────────── */}
